@@ -131,7 +131,7 @@ BackendRouter.post("/date",(req,res)=>{
   // let password=req.body.password;
   db.getConnection(async(err,connection)=>{
       if(err) throw (err);
-      const sqlSearch=`SELECT * FROM customer_details WHERE date_of BETWEEN '${fromdate}' AND '${todata}'`
+      const sqlSearch=`SELECT * FROM customer_details WHERE date_of BETWEEN '${fromdate}' AND '${t}'`
       await connection.query(sqlSearch,async(err,result)=>{
           if(err) throw(err)
           console.log("result",result);
