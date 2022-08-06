@@ -50,15 +50,20 @@ export default function Maincontent() {
                 <div className="col">
                   <div className="parent-btn">
                     <button type="submit" class="btn1">
+
+                    <Link to='/place'>
                       <span class="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">New Lead</span>
+                      <span class="btn1-name">Place</span>
+                      </Link>
                     </button>
 
                     <button type="submit" class="btn1">
+                      <Link to='/city'>
                       <span class="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">New Lead</span>
+                      <span class="btn1-name">City</span>
+                      </Link>
                     </button>
                     <button type="submit" class="btn1">
                       <span class="plusSymbol">+</span>

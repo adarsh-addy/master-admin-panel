@@ -6,16 +6,16 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles/engineermaster.css";
 
-export default function Engineermaster() {
+export default function City() {
   const [product, setProduct] = useState([]);
-  let [eng_name, setEng_name] = useState("");
-  console.log(eng_name);
+  let [city, setCity] = useState("");
+  console.log(city);
 
   async function handleClick(e) {
     e.preventDefault();
     let result = await axios.post(
-      "http://localhost:5800/backend/engineername",
-      { eng_name }
+      "http://localhost:5800/backend/city",
+      { city }
     );
     console.log(result.data.records);
     setProduct([...result.data.records]);
@@ -32,10 +32,10 @@ export default function Engineermaster() {
                   <div className="col">
                     <Form>
                       <Form.Group className="mb-3">
-                        <Form.Label htmlFor="Select">Engineer Name</Form.Label>
+                        <Form.Label htmlFor="Select">City</Form.Label>
                         <Form.Select
                           id="Select"
-                          onChange={(e) => setEng_name(e.target.value)}
+                          onChange={(e) => setCity(e.target.value)}
                         >
                           <option>Something</option>
                           <option>Select1</option>
@@ -66,11 +66,11 @@ export default function Engineermaster() {
                     <thead>
                       <th>ID</th>
                       {/* <th>Mobile</th> */}
-                      <th>Engineer Name</th>
-                      {/* <th>Customer Name</th>
-                      <th>Place</th>
+                      {/* <th>Engineer Name</th>
+                      <th>Customer Name</th> */}
+                      {/* <th>Place</th> */}
                       <th>City</th>
-                      <th>Meeting</th>
+                      {/* <th>Meeting</th>
                       <th>Brand</th> */}
                     </thead>
                     <tbody>
@@ -80,11 +80,11 @@ export default function Engineermaster() {
                             <tr key={idx}>
                               <td>{ele.id}</td>
                               {/* <td>{ele.mobile_num}</td> */}
-                              <td>{ele.eng_name}</td>
-                              {/* <td>{ele.cust_name}</td>
-                              <td>{ele.place}</td>
+                              {/* <td>{ele.eng_name}</td>
+                              <td>{ele.cust_name}</td> */}
+                              {/* <td>{ele.place}</td> */}
                               <td>{ele.city}</td>
-                              <td>{ele.meeting}</td>
+                              {/* <td>{ele.meeting}</td>
                               <td>{ele.brand}</td> */}
                             </tr>
                           );

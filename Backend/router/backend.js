@@ -28,6 +28,7 @@ BackendRouter.post("/save", async (req, res) => {
   const visit_egg_mobile = req.body.visit_egg_mobile;
   const meeting = req.body.meeting;
   const date = req.body.date;
+  const comment=req.body.comment;
   // const encryptpassword=await bcrypt.hash(password,8);
 
   // callback og getconnection is type of promise return type of callback.
@@ -42,7 +43,7 @@ BackendRouter.post("/save", async (req, res) => {
     // whenever this is called we want to insert something to database;
 
     const sqlInsert =
-      "INSERT INTO customer_details(mobile_num,eng_name,cust_name,contactor_mobile,contactor_name,place,city,state_of_work,no_of_storey,brand,visit_egg_name,visit_egg_mobile,meeting,date_of) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO customer_details(mobile_num,eng_name,cust_name,contactor_mobile,contactor_name,place,city,state_of_work,no_of_storey,brand,visit_egg_name,visit_egg_mobile,meeting,date_of,comment) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     const insert_query = mysql.format(sqlInsert, [
       mobile,
       eng_name,
@@ -58,6 +59,7 @@ BackendRouter.post("/save", async (req, res) => {
       visit_egg_mobile,
       meeting,
       date,
+      comment
     ]);
 
     // now asking the connection for sql database for the given record;
@@ -87,6 +89,25 @@ BackendRouter.post("/save", async (req, res) => {
   });
 });
 
+BackendRouter.post("/idresult",(req,res)=>{
+  const id = req.body.id;
+  console.log("--->id",id);
+  // let password=req.body.password;
+  db.getConnection(async(err,connection)=>{
+      if(err) throw (err);
+      const sqlSearch=`SELECT * FROM customer_details WHERE id='${id}'`
+      await connection.query(sqlSearch,async(err,result)=>{
+          if(err) throw(err)
+          console.log("result",result);
+          res.json({
+            message: "Query executed",
+            records: result,
+          });
+          connection.release();
+        });
+      }
+  )
+})
 
 BackendRouter.get("/show", async (req, res) => {
     db.getConnection(async (err, connection) => {
@@ -131,7 +152,7 @@ BackendRouter.post("/date",(req,res)=>{
   // let password=req.body.password;
   db.getConnection(async(err,connection)=>{
       if(err) throw (err);
-      const sqlSearch=`SELECT * FROM customer_details WHERE date_of BETWEEN '${fromdate}' AND '${t}'`
+      const sqlSearch=`SELECT * FROM customer_details WHERE date_of BETWEEN '${fromdate}' AND '${todata}'`
       await connection.query(sqlSearch,async(err,result)=>{
           if(err) throw(err)
           console.log("result",result);
@@ -145,5 +166,42 @@ BackendRouter.post("/date",(req,res)=>{
   )
 })
 
+BackendRouter.post("/place",(req,res)=>{
+  const place = req.body.place;
+  // let password=req.body.password;
+  db.getConnection(async(err,connection)=>{
+      if(err) throw (err);
+      const sqlSearch=`SELECT * FROM customer_details WHERE place='${place}'`
+      await connection.query(sqlSearch,async(err,result)=>{
+          if(err) throw(err)
+          console.log("result",result);
+          res.json({
+            message: "Query executed",
+            records: result,
+          });
+          connection.release();
+        });
+      }
+  )
+})
+
+BackendRouter.post("/city",(req,res)=>{
+  const city = req.body.city;
+  // let password=req.body.password;
+  db.getConnection(async(err,connection)=>{
+      if(err) throw (err);
+      const sqlSearch=`SELECT * FROM customer_details WHERE city='${city}'`
+      await connection.query(sqlSearch,async(err,result)=>{
+          if(err) throw(err)
+          console.log("result",result);
+          res.json({
+            message: "Query executed",
+            records: result,
+          });
+          connection.release();
+        });
+      }
+  )
+})
 
 module.exports = BackendRouter;

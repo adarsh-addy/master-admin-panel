@@ -15,6 +15,7 @@ export default function Leadview() {
 
   async function handleClick(e) {
     e.preventDefault();
+    console.log(fromdate,todate);
     let result = await axios.post("http://localhost:5800/backend/date", {
       fromdate,
       todate,

@@ -60,6 +60,8 @@ function Nav_bar() {
                   <Nav.Link href="/customerdetail">Customer Details</Nav.Link>
                   <Nav.Link href="/engineermaster">Engineer Master</Nav.Link>
                   <Nav.Link href="/leadview">Leadview/Modify</Nav.Link>
+                  <Nav.Link href="/place">Place</Nav.Link>
+                  <Nav.Link href="/city">City</Nav.Link>
                   {/* <Nav.Link href="#action2">Link</Nav.Link>
                   <NavDropdown
                     title="Dropdown"

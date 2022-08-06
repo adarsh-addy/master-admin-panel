@@ -31,6 +31,7 @@ export default function Customerdetails() {
   let [visit_egg_mobile, setVisit_egg_mobile] = useState("");
   let [meeting, setMeeting] = useState("");
   let [date, setDate] = useState("");
+  let [comment, setComment] = useState("");
   console.log(mobile);
   console.log(eng_name);
   console.log(cust_name);
@@ -45,6 +46,7 @@ export default function Customerdetails() {
   console.log(visit_egg_mobile);
   console.log(meeting);
   console.log(date);
+  console.log(comment);
 
   async function handleClick(e) {
     e.preventDefault();
@@ -63,11 +65,44 @@ export default function Customerdetails() {
       visit_egg_mobile,
       meeting,
       date,
+      comment,
     });
     console.log(resp.data);
     let result = await axios.get("http://localhost:5800/backend/show");
     console.log(result.data.records);
     setProduct([...result.data.records]);
+  }
+
+  // let [id,setId]=useState('')
+  // console.log(id);
+  //   async function handleClickId(idx){
+  //     setId(idx);
+  // let idResult= await axios.post("http://localhost:5800/backend/idresult",{id:idx})
+  // console.log(idResult);
+  //   }
+
+  async function handleClickId(idx) {
+    let idResult = await axios.post("http://localhost:5800/backend/idresult", {
+      id: idx,
+    });
+    console.log(idResult.data.records[0]);
+    const customer_data = idResult.data.records[0];
+    setMobile(customer_data.mobile_num); //--->mobile_num is database column name & also we again overwrite the used for incoming use
+    setEng_name(customer_data.eng_name);
+    setCust_name(customer_data.cust_name);
+    setContactor_mobile(customer_data.contactor_mobile);
+    setContactor_name(customer_data.contactor_name);
+    setPlace(customer_data.place);
+    setCity(customer_data.city);
+    setState_of_work(customer_data.state_of_work);
+    setNo_of_storey(customer_data.no_of_storey);
+    setBrand(customer_data.brand);
+    setVisit_egg_name(customer_data.visit_egg_name);
+    setVisit_egg_mobile(customer_data.visit_egg_mobile);
+    setMeeting(customer_data.meeting);
+    setDate(customer_data.date_of);
+    setComment(customer_data.comment)
+
   }
 
   return (
@@ -85,6 +120,7 @@ export default function Customerdetails() {
                         type="number"
                         placeholder="Enter mobile no."
                         onChange={(e) => setMobile(e.target.value)}
+                        value={mobile}
                       />
                     </Form.Group>
 
@@ -93,6 +129,7 @@ export default function Customerdetails() {
                       <Form.Select
                         id="Select"
                         onChange={(e) => setEng_name(e.target.value)}
+                        value={eng_name}
                       >
                         <option>Something</option>
                         <option>Select1</option>
@@ -109,6 +146,7 @@ export default function Customerdetails() {
                         type="text"
                         placeholder="Customer Name"
                         onChange={(e) => setCust_name(e.target.value)}
+                        value={cust_name}
                       />
                     </Form.Group>
                     <Form.Group
@@ -120,6 +158,7 @@ export default function Customerdetails() {
                         type="number"
                         placeholder="Contactor Mobile"
                         onChange={(e) => setContactor_mobile(e.target.value)}
+                        value={contactor_mobile}
                       />
                     </Form.Group>
                     <Form.Group
@@ -131,6 +170,7 @@ export default function Customerdetails() {
                         type="text"
                         placeholder="Contactor Name"
                         onChange={(e) => setContactor_name(e.target.value)}
+                        value={contactor_name}
                       />
                     </Form.Group>
 
@@ -139,6 +179,7 @@ export default function Customerdetails() {
                       <Form.Select
                         id="Select"
                         onChange={(e) => setPlace(e.target.value)}
+                        value={place}
                       >
                         <option>Select</option>
                         <option>Select1</option>
@@ -151,6 +192,7 @@ export default function Customerdetails() {
                       <Form.Select
                         id="Select"
                         onChange={(e) => setCity(e.target.value)}
+                        value={city}
                       >
                         <option>Select</option>
                         <option>Select1</option>
@@ -167,6 +209,7 @@ export default function Customerdetails() {
                         type="text"
                         placeholder="State of work"
                         onChange={(e) => setState_of_work(e.target.value)}
+                        value={state_of_work}
                       />
                     </Form.Group>
 
@@ -179,6 +222,7 @@ export default function Customerdetails() {
                         type="number"
                         placeholder="No of Storey"
                         onChange={(e) => setNo_of_storey(e.target.value)}
+                        value={no_of_storey}
                       />
                     </Form.Group>
 
@@ -187,6 +231,7 @@ export default function Customerdetails() {
                       <Form.Select
                         id="Select"
                         onChange={(e) => setBrand(e.target.value)}
+                        value={brand}
                       >
                         <option>Select</option>
                         <option>Select1</option>
@@ -203,6 +248,7 @@ export default function Customerdetails() {
                         type="text"
                         placeholder="Visit Egg Name"
                         onChange={(e) => setVisit_egg_name(e.target.value)}
+                        value={visit_egg_name}
                       />
                     </Form.Group>
 
@@ -215,6 +261,7 @@ export default function Customerdetails() {
                         type="text"
                         placeholder="Visit Egg mobile"
                         onChange={(e) => setVisit_egg_mobile(e.target.value)}
+                        value={visit_egg_mobile}
                       />
                     </Form.Group>
 
@@ -223,6 +270,7 @@ export default function Customerdetails() {
                       <Form.Select
                         id="Select"
                         onChange={(e) => setMeeting(e.target.value)}
+                        value={meeting}
                       >
                         <option>Select</option>
                         <option>Select1</option>
@@ -235,6 +283,7 @@ export default function Customerdetails() {
                         type="Date"
                         placeholder="Date"
                         onChange={(e) => setDate(e.target.value)}
+                        value={date}
                       />
                     </Form.Group>
 
@@ -247,6 +296,8 @@ export default function Customerdetails() {
                           as="textarea"
                           placeholder="Leave a comment here"
                           style={{ height: "100px" }}
+                          onChange={(e) => setComment(e.target.value)}
+                          value={comment}
                         />
                       </FloatingLabel>
                     </Form.Group>
@@ -257,6 +308,12 @@ export default function Customerdetails() {
                       onClick={handleClick}
                     >
                       Submit
+                    </Button>
+                    <Button
+                      variant="primary ms-2"
+                      type="submit"
+                    >
+                      Update
                     </Button>
                   </Form>
                 </div>
@@ -285,7 +342,7 @@ export default function Customerdetails() {
                     {product.length !== 0 ? (
                       product.map((ele, idx) => {
                         return (
-                          <tr key={idx}>
+                          <tr key={idx} onClick={() => handleClickId(ele.id)}>
                             <td>{ele.id}</td>
                             <td>{ele.mobile_num}</td>
                             <td>{ele.eng_name}</td>
