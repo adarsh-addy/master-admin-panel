@@ -6,16 +6,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles/customerdetails.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Loader from "./Loader";
 
 export default function Customerdetails() {
-  useEffect(() => {
-    async function res() {
-      let resp = await axios.get("http://localhost:5800/");
-      console.log(resp.data);
-    }
-    res();
-  }, []);
-
+  
+const[isLoading,setIsLoading]=useState(false);
   const [product, setProduct] = useState([]);
   let [mobile, setMobile] = useState("");
   let [eng_name, setEng_name] = useState("");
@@ -49,6 +44,7 @@ export default function Customerdetails() {
   console.log(comment);
 
   async function handleClick(e) {
+    setIsLoading(true)
     e.preventDefault();
     let resp = await axios.post("http://localhost:5800/backend/save", {
       mobile,
@@ -71,6 +67,8 @@ export default function Customerdetails() {
     let result = await axios.get("http://localhost:5800/backend/show");
     console.log(result.data.records);
     setProduct([...result.data.records]);
+    setTimeout(()=> setIsLoading(false),1000)
+   
   }
 
   // let [id,setId]=useState('')
@@ -80,8 +78,9 @@ export default function Customerdetails() {
   // let idResult= await axios.post("http://localhost:5800/backend/idresult",{id:idx})
   // console.log(idResult);
   //   }
-
+let[id,setId]=useState('');
   async function handleClickId(idx) {
+    setId(idx)//using this value for update query to need of id value 
     let idResult = await axios.post("http://localhost:5800/backend/idresult", {
       id: idx,
     });
@@ -100,13 +99,54 @@ export default function Customerdetails() {
     setVisit_egg_name(customer_data.visit_egg_name);
     setVisit_egg_mobile(customer_data.visit_egg_mobile);
     setMeeting(customer_data.meeting);
-    setDate(customer_data.date_of);
+    let dt=customer_data.date_of?customer_data.date_of.split('T')[0]:"";
+    setDate(dt);
     setComment(customer_data.comment)
 
   }
+  
+  async function handleUpdate(e){
+    e.preventDefault()
+    let resp = await axios.patch("http://localhost:5800/backend/update", {
+    id,  
+    mobile,
+      eng_name,
+      cust_name,
+      contactor_mobile,
+      contactor_name,
+      place,
+      city,
+      state_of_work,
+      no_of_storey,
+      brand,
+      visit_egg_name,
+      visit_egg_mobile,
+      meeting,
+      date,
+      comment,
+    });
+    console.log(resp.data);
+  }
 
+  useEffect(() => {
+    async function res() {
+      setIsLoading(true)
+      let result = await axios.get("http://localhost:5800/backend/show");
+    console.log(result.data.records);
+    setProduct([...result.data.records]);
+    setTimeout(()=> setIsLoading(false),2000)
+    // setIsLoading(false)
+    }
+    res();
+  }, []);
+
+  if(isLoading){
+    return <Loader/>
+  }
+  else{
   return (
-    <div className="customer-details">
+
+     <div className="customer-details">
       <div className="container-sm w-50">
         <div className="row">
           <div className="col">
@@ -312,6 +352,7 @@ export default function Customerdetails() {
                     <Button
                       variant="primary ms-2"
                       type="submit"
+                      onClick={handleUpdate}
                     >
                       Update
                     </Button>
@@ -366,4 +407,5 @@ export default function Customerdetails() {
       </div>
     </div>
   );
+}
 }

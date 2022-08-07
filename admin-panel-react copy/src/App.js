@@ -8,6 +8,7 @@ import Leadview from "./components/Leadview";
 import Navbar from "./components/Navbar/Nav_bar";
 import Place from "./components/Place";
 import City from "./components/City";
+// import Loader from "./components/Loader";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
       <BrowserRouter>
       <Navbar/>
+      {/* <Loader/> */}
       <Routes>
       <Route path="/" element={<Content1/>}/>
         <Route path="/customerdetail" element={<Customerdetails/>}/>

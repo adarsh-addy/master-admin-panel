@@ -24,3 +24,9 @@ font-size: 35px;
     color: white;
 font-size: 15px;
 }
+
+/* @media screen and (max-width: 480px) {
+    .btn1 {
+      background-color: red;
+    }
+  } */
