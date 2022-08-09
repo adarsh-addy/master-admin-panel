@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import CloseButton from "react-bootstrap/esm/CloseButton";
 import Loader from "./Loader";
 import "../styles/engineermaster.css";
 
@@ -37,6 +39,7 @@ export default function Place() {
           <div className="row">
             <div className="col">
               <Card body className="mt-4">
+              <Link to='/'><CloseButton style={{float:"right"}}/></Link>
                 <div className="row">
                   <div className="col">
                     <Form>

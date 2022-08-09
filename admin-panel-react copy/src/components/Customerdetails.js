@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles/customerdetails.css";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import CloseButton from "react-bootstrap/esm/CloseButton";
 import Loader from "./Loader";
 
 export default function Customerdetails() {
@@ -159,6 +161,7 @@ let[id,setId]=useState('');
         <div className="row">
           <div className="col">
             <Card body className="mt-4">
+            <Link to='/'><CloseButton style={{float:"right"}}/></Link>
               <div className="row">
                 <div className="col">
                   <Form>

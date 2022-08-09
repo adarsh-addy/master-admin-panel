@@ -1,10 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Loader from "./Loader";
+import CloseButton from 'react-bootstrap/CloseButton';
+
 import "../styles/leadview.css";
 
 export default function Leadview() {
@@ -36,9 +39,11 @@ export default function Leadview() {
   return (
     <div className="leadview">
       <div className="container-sm w-50">
+
         <div className="row">
           <div className="col">
             <Card body className="mt-4">
+        <Link to='/'><CloseButton style={{float:"right"}}/></Link>
               <div className="row">
                 <div className="col">
                   <Form>
