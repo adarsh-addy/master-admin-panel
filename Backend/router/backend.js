@@ -106,28 +106,20 @@ BackendRouter.patch("/update", async (req, res) => {
   const meeting = req.body.meeting;
   const date = req.body.date;
   const comment = req.body.comment;
-  // const encryptpassword=await bcrypt.hash(password,8);
-
-  // callback og getconnection is type of promise return type of callback.
+  if(!id && !mobile ){
+   return res.status(400).send({
+      message:"Invalid id & mobile no."
+    })
+  }
+  
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-
-    // whenever this is called , we will search in database;
-    // ? = this is placeholder
-    // const sqlSearch =
-    //   "SELECT *FROM customer_details WHERE mobile_num=? && eng_name=? && cust_name=?";
-    // const search_query = mysql.format(sqlSearch, [mobile, eng_name, cust_name]);
-    // whenever this is called we want to insert something to database;
-
     const sqlInsert = `UPDATE customer_details SET mobile_num=${mobile}, eng_name='${eng_name}', cust_name='${cust_name}', contactor_mobile=${contactor_mobile} ,contactor_name='${contactor_name}', place='${place}', city='${city}', state_of_work='${state_of_work}', no_of_storey=${no_of_storey}, brand='${brand}', visit_egg_name='${visit_egg_name}', visit_egg_mobile=${visit_egg_mobile}, meeting='${meeting}', date_of='${date}', comment='${comment}' WHERE id=${id}`;
-
-    // now asking the connection for sql database for the given record;
-
     await connection.query(sqlInsert, (err, result) => {
       if (err) throw err;
-      console.log("Record inserted");
+      console.log("Record updated");
       res.json({
-        message: "Record inserted successfully",
+        message: "Record updated successfully",
         result: result,
       });
       connection.release();

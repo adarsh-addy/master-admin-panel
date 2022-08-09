@@ -4,6 +4,7 @@ import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Loader from "./Loader";
 import "../styles/engineermaster.css";
 
 export default function City() {
@@ -11,7 +12,10 @@ export default function City() {
   let [city, setCity] = useState("");
   console.log(city);
 
+  const[isLoading,setIsLoading]=useState(false);
+
   async function handleClick(e) {
+    setIsLoading(true)
     e.preventDefault();
     let result = await axios.post(
       "http://localhost:5800/backend/city",
@@ -19,8 +23,13 @@ export default function City() {
     );
     console.log(result.data.records);
     setProduct([...result.data.records]);
+    setIsLoading(false)
   }
 
+  if(isLoading){
+    return <Loader/>
+  }
+  else{
   return (
     <>
       <div className="engineermaster">
@@ -102,4 +111,5 @@ export default function City() {
       </div>
     </>
   );
+}
 }

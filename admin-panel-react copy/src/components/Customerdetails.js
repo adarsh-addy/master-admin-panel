@@ -67,7 +67,8 @@ const[isLoading,setIsLoading]=useState(false);
     let result = await axios.get("http://localhost:5800/backend/show");
     console.log(result.data.records);
     setProduct([...result.data.records]);
-    setTimeout(()=> setIsLoading(false),1000)
+    // setTimeout(()=> setIsLoading(false),1000)
+    setIsLoading(false)
    
   }
 
@@ -106,6 +107,7 @@ let[id,setId]=useState('');
   }
   
   async function handleUpdate(e){
+    setIsLoading(true)
     e.preventDefault()
     let resp = await axios.patch("http://localhost:5800/backend/update", {
     id,  
@@ -124,8 +126,14 @@ let[id,setId]=useState('');
       meeting,
       date,
       comment,
+    }).catch((err)=>{//here we applying an error condition to using a update so we using catch for this to handle an error issue
+      // console.log(err.response.data);
+      alert(err.response.data.message);
     });
+    if(resp){
     console.log(resp.data);
+    }
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -134,8 +142,8 @@ let[id,setId]=useState('');
       let result = await axios.get("http://localhost:5800/backend/show");
     console.log(result.data.records);
     setProduct([...result.data.records]);
-    setTimeout(()=> setIsLoading(false),2000)
-    // setIsLoading(false)
+    // setTimeout(()=> setIsLoading(false),2000)
+    setIsLoading(false)
     }
     res();
   }, []);

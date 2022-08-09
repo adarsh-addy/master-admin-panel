@@ -4,6 +4,7 @@ import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Loader from "./Loader";
 import "../styles/leadview.css";
 
 export default function Leadview() {
@@ -13,7 +14,10 @@ export default function Leadview() {
   console.log(fromdate);
   console.log(todate);
 
+  const[isLoading,setIsLoading]=useState(false);
+
   async function handleClick(e) {
+    setIsLoading(true)
     e.preventDefault();
     console.log(fromdate,todate);
     let result = await axios.post("http://localhost:5800/backend/date", {
@@ -22,8 +26,13 @@ export default function Leadview() {
     });
     console.log(result.data.records);
     setProduct([...result.data.records]);
+    setIsLoading(false)
   }
 
+  if(isLoading){
+    return <Loader/>
+  }
+  else{
   return (
     <div className="leadview">
       <div className="container-sm w-50">
@@ -109,4 +118,5 @@ export default function Leadview() {
       </div>
     </div>
   );
+}
 }
