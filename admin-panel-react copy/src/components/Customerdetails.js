@@ -14,6 +14,7 @@ export default function Customerdetails() {
   
 const[isLoading,setIsLoading]=useState(false);
   const [product, setProduct] = useState([]);
+  const [error,setError]=useState(true)
   let [mobile, setMobile] = useState("");
   let [eng_name, setEng_name] = useState("");
   let [cust_name, setCust_name] = useState("");
@@ -170,8 +171,9 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="number"
                         placeholder="Enter mobile no."
-                        onChange={(e) => setMobile(e.target.value)}
+                        onChange={(e) =>{ setMobile(e.target.value);e.target.value? setError(false) : setError(true)}}
                         value={mobile}
+                        required
                       />
                     </Form.Group>
 
@@ -357,6 +359,7 @@ let[id,setId]=useState('');
                       variant="primary"
                       type="submit"
                       onClick={handleClick}
+                      disabled={error}
                     >
                       Submit
                     </Button>
