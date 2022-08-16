@@ -12,7 +12,7 @@ function Nav_bar() {
   let navigate = useNavigate();
 function logOut(){
   localStorage.removeItem("token");
-  navigate("/login")
+  navigate("/")
 
 }
 
@@ -21,7 +21,7 @@ function logOut(){
       {[false].map((expand) => (
         <Navbar key={expand} bg="info" expand={expand} className="">
           <Container fluid>
-            <Navbar.Brand href="#">Admin Panel</Navbar.Brand>
+            <Navbar.Brand href="/content">Admin Panel</Navbar.Brand>
             <Form className="d-flex ">
             <Form.Control
               type="search"
@@ -43,7 +43,7 @@ function logOut(){
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                <a href="/" className="navbar-brand mx-4 mb-3">
+                <a href="/content" className="navbar-brand mx-4 mb-3">
                     <h3 className="text-primary"><i className="fa fa-user-edit me-2"></i>Root</h3>
                 </a>
                 <div className="d-flex align-items-center ms-4 mb-4">
@@ -62,7 +62,7 @@ function logOut(){
               <hr/>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/content">Home</Nav.Link>
                   <Nav.Link href="/customerdetail">Customer Details</Nav.Link>
                   <Nav.Link href="/engineermaster">Engineer Master</Nav.Link>
                   <Nav.Link href="/leadview">Leadview/Modify</Nav.Link>

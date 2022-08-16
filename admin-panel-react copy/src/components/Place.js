@@ -39,7 +39,7 @@ export default function Place() {
           <div className="row">
             <div className="col">
               <Card body className="mt-4">
-              <Link to='/'><CloseButton style={{float:"right"}}/></Link>
+              <Link to='/content'><CloseButton style={{float:"right"}}/></Link>
                 <div className="row">
                   <div className="col">
                     <Form>

@@ -35,7 +35,7 @@ let resp = await axios.post("http://localhost:5800/backend/userAuth", {
           //     "x-access-token": localStorage.getItem("token")
           //   }
           // })
-      navigate("/")
+      navigate("/content")
     }else if(resp.data.message==="User does not exist"){
 navigate("/signup")
     }

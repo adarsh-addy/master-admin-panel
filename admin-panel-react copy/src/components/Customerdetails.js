@@ -146,7 +146,7 @@ let[id,setId]=useState('');
     console.log(result.data.records);
     setProduct([...result.data.records]);
     // setTimeout(()=> setIsLoading(false),2000)
-    setIsLoading(false)
+     setIsLoading(false)
     }
     res();
   }, []);
@@ -162,7 +162,7 @@ let[id,setId]=useState('');
         <div className="row">
           <div className="col">
             <Card body className="mt-4">
-            <Link to='/'><CloseButton style={{float:"right"}}/></Link>
+            <Link to='/content'><CloseButton style={{float:"right"}}/></Link>
               <div className="row">
                 <div className="col">
                   <Form>
