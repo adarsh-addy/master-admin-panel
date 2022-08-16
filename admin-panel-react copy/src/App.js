@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate,useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Content1 from "./components/Content1";
@@ -14,44 +14,27 @@ import Signup from "./components/Signup";
 // import Loader from "./components/Loader";
 
 function App() {
-  let navigate=useNavigate()
-  let [isAuthenticated, setIsauthenticated] = useState(null);
-  useEffect(() => {
-    setIsauthenticated(localStorage.getItem("isAuthenticated"));
-    // if(!isAuthenticated){
-    //   navigate("/login")
-    // }else{
-    //   navigate("/")
-    // }
-  }, []);
-  // let navigate=useNavigate()
-
-  
-  
-    return (
-      <div className="App">
-        {/* <Content1/> */}
-
+  let location=useLocation();
+  let token =localStorage.getItem("token") ||null
+console.log(location.pathname)
+const pathName=location.pathname;
+  return (
+    <div className="App">
+      
+      {!(pathName.includes('/login') ||pathName.includes('/signup')) ?<Navbar />:null}
+      <Routes>
+        <Route path="/" element={token?<Content1 />:<Navigate to="/login" replace/>} />
+        <Route path="/customerdetail" element={token?<Customerdetails />:<Navigate to="/login" replace/>} />
+        <Route path="/engineermaster" element={token?<Engineermaster />:<Navigate to="/login" replace/>} />
+        <Route path="/leadview" element={token?<Leadview />:<Navigate to="/login" replace/>} />
+        <Route path="/place" element={token?<Place />:<Navigate to="/login" replace/>} />
+        <Route path="/city" element={token?<City />:<Navigate to="/login" replace/>} />
         
-        {/* <Loader/> */}
-        {/* {isAuthenticated && <Navbar />} */}
-        <Navbar />
-        <Routes>
-       
-        
-          <Route path="/" element={<Content1 />} />
-          <Route path="/customerdetail" element={<Customerdetails />} />
-          <Route path="/engineermaster" element={<Engineermaster />} />
-          <Route path="/leadview" element={<Leadview />} />
-          <Route path="/place" element={<Place />} />
-          <Route path="/city" element={<City />} />
-          <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-        </Routes>
-       
-      </div>
-    );
- 
+        <Route path="/login" element={token? <Navigate to="/" replace/>:<Login />} />
+        <Route path="/signup" element={token? <Navigate to="/" replace/>:<Signup />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

@@ -7,18 +7,34 @@ import "../styles/login.css";
 export default function Login() {
   let [username,setUsername]=useState('');
   let [password,setPassword]=useState('')
+  let[category,setCategory]=useState('')
+
 let navigate=useNavigate();
   async function handleSubmit(e){
     console.log("hiiii");
 e.preventDefault();
 let resp = await axios.post("http://localhost:5800/backend/userAuth", {
       email:username,
+      category,
       password,
       
+    }).catch((err)=>{
+      alert(err.response.data.message)
+      // console.log(err.response.data.message);
     });
+    if(resp){
     console.log(resp.data);
+    }
+    
     if(resp.data.message==="authenticated"){
-      localStorage.setItem("isAuthenticated",true)
+      // localStorage.setItem("isAuthenticated",true)
+      localStorage.setItem("token", resp.data.accessToken);
+
+          // let res= await axios.get("http://localhost:5800/backend/validate", {//not required to validate
+          //   headers: {
+          //     "x-access-token": localStorage.getItem("token")
+          //   }
+          // })
       navigate("/")
     }else if(resp.data.message==="User does not exist"){
 navigate("/signup")
@@ -26,20 +42,32 @@ navigate("/signup")
   }
   return (
     <div className="login">
-      <div class="login-box">
+      <div className="login-box">
         <h2>Login</h2>
         <br />
         <form onSubmit={handleSubmit}>
-          <div class="user-box">
+          <div className="user-box">
             <input type="text" name="username" required="" value={username} onChange={(e)=>setUsername(e.target.value)}/>
             <label>Username</label>
           </div>
-          <div class="user-box">
+
+          <select onChange={(e) => setCategory(e.target.value)}
+                        value={category}>
+  <option >Select</option>
+  <option >Admin</option>
+  <option >User</option>
+
+</select>
+<br/>
+<br/>
+<br/>
+          
+          <div className="user-box">
             <input type="password" name="password" required="" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             <label>Password</label>
           </div>
 
-          <div class="user-box">
+          <div className="user-box">
   
   <Link to="/signup">Add new account</Link>
  </div>
@@ -52,7 +80,7 @@ navigate("/signup")
       <span></span>
       Login
     </a> */}
-          <button class="custom-btn btn-12" type="submit" >
+          <button className="custom-btn btn-12" type="submit" >
             <span>Click!</span>
             <span>Login</span>
           </button>

@@ -2,6 +2,9 @@ const express = require("express");
 const BackendRouter = express.Router();
 const mysql = require("mysql");
 const bcrypt = require('bcrypt');
+const { createAccessJwt, createRefreshJwt } = require('../utils/jwt')
+const {verifyJWT} =require("../utils/verifyJWT")
+
 
 
 // creatpool is used for application grade connectivity in mysql
@@ -239,10 +242,15 @@ BackendRouter.post("/city", (req, res) => {
 
 BackendRouter.post('/user',async (req, res) => {
   const name= req.body.name;
+  const category=req.body.category;
   const email = req.body.email;
   const password = req.body.password;
   const encryptpassword = await bcrypt.hash(password,8) 
-
+  if(!name && !category && !email && !password ){
+    return res.status(400).send({
+       message:"Invalid name,email & password"
+     })
+   }
   // callback og getconnection is type of promise return type of callback.
   db.getConnection(async(err, connection) => {
       if (err) throw (err);
@@ -253,8 +261,8 @@ BackendRouter.post('/user',async (req, res) => {
       const search_query = mysql.format(sqlSearch, [email]);
       // whenever this is called we want to insert something to database;
 
-      const sqlInsert = "INSERT INTO auth_db(name,email,password) VALUES(?,?,?)";
-      const insert_query = mysql.format(sqlInsert, [name,email, encryptpassword]);
+      const sqlInsert = "INSERT INTO auth_db(name,category,email,password) VALUES(?,?,?,?)";
+      const insert_query = mysql.format(sqlInsert, [name,category,email, encryptpassword]);
 
       // now asking the connection for sql database for the given email;
       await connection.query(search_query, async(err, result) => {
@@ -289,11 +297,17 @@ BackendRouter.post('/user',async (req, res) => {
 // bcrypt => comparison 
 BackendRouter.post('/userAuth', (req, res) => {
   let email = req.body.email;
+  let category=req.body.category;
   let password = req.body.password;
+  if(!email && category && !password ){
+    return res.status(400).send({
+       message:"Invalid email & password"
+     })
+   }
   db.getConnection(async(err,connection) => {
       if (err) throw (err);
-      const sqlSearch = "SELECT*FROM auth_db WHERE email=?"
-      const search_query = mysql.format(sqlSearch, [email])    //searching for the given email
+      const sqlSearch = "SELECT*FROM auth_db WHERE email=? && category=?"
+      const search_query = mysql.format(sqlSearch, [email,category])    //searching for the given email
       await connection.query(search_query, async(err, result) => {
           if (err) throw (err);
           if (result.length == 0) {
@@ -306,9 +320,20 @@ BackendRouter.post('/userAuth', (req, res) => {
               const hasedpassword = result[0].password;
               console.log(password);
               console.log(hasedpassword);
-              let val= await bcrypt.compare(password, hasedpassword)
+              let val= await bcrypt.compare(password+"", hasedpassword)
           if(val){
-            res.json({message:"authenticated"})
+            // res.json({message:"authenticated"})
+
+            const accessToken = await createAccessJwt(email);
+                const refreshToken = await createRefreshJwt(email);
+                res.json({
+                    user:{email,category},
+                    accessToken,
+                    refreshToken,
+                    message:"authenticated"
+                    
+                    
+                })
           }else{
             console.log("incorrect password");
             res.json({message:"incorrect password"})
@@ -320,5 +345,10 @@ BackendRouter.post('/userAuth', (req, res) => {
   })
 })
 
+BackendRouter.get("/validate", verifyJWT,(req,res) => {//authentication only verified user
+  res.json({
+       auth:true
+   })
+})
 
 module.exports = BackendRouter;

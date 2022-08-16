@@ -13,33 +13,33 @@ export default function Maincontent() {
               <div className="row">
                 <div className="col">
                   <div className="parent-btn">
-                    <button type="submit" class="btn1">
-                      <span class="plusSymbol">+</span>
+                    <button type="submit" className="btn1">
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">New Lead</span>
+                      <span className="btn1-name">New Lead</span>
                     </button>
 
-                    <button type="submit" class="btn1">
+                    <button type="submit" className="btn1">
                       <Link to='/leadview'>
-                      <span class="plusSymbol">+</span>
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">View/Modify</span>
+                      <span className="btn1-name">View/Modify</span>
                       </Link>
                     </button>
-                    <button type="submit" class="btn1">
+                    <button type="submit" className="btn1">
                       <Link to='/engineermaster'>
-                      <span class="plusSymbol">+</span>
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">Engineer Master</span>
+                      <span className="btn1-name">Engineer Master</span>
                       </Link>
                     </button>
 
-                    <button type="submit" class="btn1">
+                    <button type="submit" className="btn1">
                       <Link to='/customerdetail'>
 
-                      <span class="plusSymbol">+</span>
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">Customer details</span>
+                      <span className="btn1-name">Customer details</span>
                       </Link>
                     </button>
                   </div>
@@ -49,32 +49,32 @@ export default function Maincontent() {
               <div className="row">
                 <div className="col">
                   <div className="parent-btn">
-                    <button type="submit" class="btn1">
+                    <button type="submit" className="btn1">
 
                     <Link to='/place'>
-                      <span class="plusSymbol">+</span>
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">Place</span>
+                      <span className="btn1-name">Place</span>
                       </Link>
                     </button>
 
-                    <button type="submit" class="btn1">
+                    <button type="submit" className="btn1">
                       <Link to='/city'>
-                      <span class="plusSymbol">+</span>
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">City</span>
+                      <span className="btn1-name">City</span>
                       </Link>
                     </button>
-                    <button type="submit" class="btn1">
-                      <span class="plusSymbol">+</span>
+                    <button type="submit" className="btn1">
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">New Lead</span>
+                      <span className="btn1-name">New Lead</span>
                     </button>
 
-                    <button type="submit" class="btn1">
-                      <span class="plusSymbol">+</span>
+                    <button type="submit" className="btn1">
+                      <span className="plusSymbol">+</span>
                       <br />
-                      <span class="btn1-name">New Lead</span>
+                      <span className="btn1-name">New Lead</span>
                     </button>
                   </div>
                 </div>

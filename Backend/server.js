@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express=require("express")
 const morgan =require("morgan")
 const cors=require('cors')
@@ -16,6 +17,26 @@ app.get('/',(req,res)=>{
 
 const BackendRouter=require('./router/backend');
 app.use('/backend',BackendRouter);
+
+
+
+
+// const errorHandler = require("./utils/errorHandler.js")
+// to handle errors*************************************************************
+// app.use('*', (req, res,next) => {
+//     const error = new Error("resources not found");
+//     error.status = 404;
+
+
+//     next(error);
+
+// })
+
+// app.use('*', (error, req, res, next) => {
+//     errorHandler(error,res)
+// })
+// ********************************************************************************************
+
 
 const Port=process.env.PORT || 5800;
 

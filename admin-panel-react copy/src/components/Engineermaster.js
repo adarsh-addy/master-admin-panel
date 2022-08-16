@@ -67,11 +67,11 @@ export default function Engineermaster() {
           </div>
         </div>
         <div className="container-sm w-75 mt-4">
-          <div class="row ">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <table class="table table-striped">
+          <div className="row ">
+            <div className="col">
+              <div className="card">
+                <div className="card-body">
+                  <table className="table table-striped">
                     <thead>
                       <th>ID</th>
                       {/* <th>Mobile</th> */}

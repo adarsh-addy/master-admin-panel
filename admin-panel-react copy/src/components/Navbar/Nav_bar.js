@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -8,7 +9,12 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import './navbar.css'
 
 function Nav_bar() {
+  let navigate = useNavigate();
+function logOut(){
+  localStorage.removeItem("token");
+  navigate("/login")
 
+}
 
   return (
     <>
@@ -25,7 +31,7 @@ function Nav_bar() {
             />
             <Button variant="outline-primary"><strong>Search</strong></Button>
           </Form>
-            <button type="button" className="btn btn-primary">Admin</button>
+            <button type="button" className="btn btn-primary"onClick={logOut}>Logout</button>
 
 
             
@@ -62,8 +68,8 @@ function Nav_bar() {
                   <Nav.Link href="/leadview">Leadview/Modify</Nav.Link>
                   <Nav.Link href="/place">Place</Nav.Link>
                   <Nav.Link href="/city">City</Nav.Link>
-                  <Nav.Link href="/login">Login</Nav.Link>
-                  <Nav.Link href="/signup">Signup</Nav.Link>
+                  {/* <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/signup">Signup</Nav.Link> */}
                   {/* <Nav.Link href="#action2">Link</Nav.Link>
                   <NavDropdown
                     title="Dropdown"
