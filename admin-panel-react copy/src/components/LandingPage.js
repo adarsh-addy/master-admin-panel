@@ -8,7 +8,7 @@ export default function LandingPage() {
         <div className="landing-page">
     <div className="container">
       <div className="header-area">
-        <div className="logo">Your <b>Website</b></div>
+        <div className="logo">Admin <b>Website</b></div>
         <ul className="links">
           <li>Home</li>
           <li>About Us</li>
@@ -19,9 +19,9 @@ export default function LandingPage() {
         </ul>
       </div>
       <div className="info">
-        <h1>Looking For Inspiration</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus odit nihil ullam nesciunt quidem iste, Repellendus odit nihil</p>
-        <button>Button name</button>
+        <h1>Our Values</h1>
+        <p>Our dedicated emerging technologies "Centers of Excellence" enable us to harness the latest technology for delivering business capability to our clients.</p>
+      <a href="http://surl.li/cscfp"> <button>Reach Us </button></a>
       </div>
       <div className="image">
         <img src="https://i.postimg.cc/65QxYYzh/001234.png" alt='' />

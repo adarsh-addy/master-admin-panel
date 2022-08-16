@@ -12,7 +12,7 @@ function Nav_bar() {
   let navigate = useNavigate();
 function logOut(){
   localStorage.removeItem("token");
-  navigate("/")
+  navigate("/login")
 
 }
 

@@ -58,6 +58,7 @@ body {
     padding: 10px 18px;
     color: #FFF;
     background-color: #6c63ff;
+    text-transform: uppercase;
 }
 
 .landing-page .info {

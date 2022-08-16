@@ -20,6 +20,22 @@
     border-radius: 10px;
   }
   
+  .login-box .exit_x{
+    position: relative;
+    left: 95%;
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,0.4) 100%);
+    border: none;
+    margin-bottom: 10px;
+    font-size:20px;
+    font-weight: bolder;
+    color: #fff;
+    min-height: 30px;
+    width: 30px;
+    border-radius: 5px;
+  }
+  a{
+    text-decoration: none;
+  }
   .login-box h2 {
     margin: 0 0 30px;
     padding: 0;
