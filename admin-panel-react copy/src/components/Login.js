@@ -24,11 +24,12 @@ export default function Login() {
         // console.log(err.response.data.message);
       });
     if (resp) {
-      console.log(resp.data);
+     console.log(resp.data);
+    //  console.log(resp.data.message.split(" ")[0]);
       alert(resp.data.message)
     }
 
-    if (resp.data.message === "authenticated") {
+    if (resp.data.message === "admin_authenticated") {
       // localStorage.setItem("isAuthenticated",true)
       localStorage.setItem("token", resp.data.accessToken);
 
@@ -38,7 +39,13 @@ export default function Login() {
       //   }
       // })
       navigate("/content");
-    } else if (resp.data.message === "User does not exist") {
+    }
+    else if (resp.data.message === "user_Authenticated") {
+      localStorage.setItem("token", resp.data.accessToken);
+      navigate("/userdashboard");
+    }
+
+     else if (resp.data.message === "User does not exist") {
       navigate("/signup");
     }
   }

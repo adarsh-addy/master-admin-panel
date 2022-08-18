@@ -14,7 +14,21 @@ export default function Customerdetails() {
   
 const[isLoading,setIsLoading]=useState(false);
   const [product, setProduct] = useState([]);
-  const [error,setError]=useState(true)
+  const [error1,setError1]=useState(true)
+  const [error2,setError2]=useState(true)
+  const [error3,setError3]=useState(true)
+  const [error4,setError4]=useState(true)
+  const [error5,setError5]=useState(true)
+  const [error6,setError6]=useState(true)
+  const [error7,setError7]=useState(true)
+  const [error8,setError8]=useState(true)
+  const [error9,setError9]=useState(true)
+  const [error10,setError10]=useState(true)
+  const [error11,setError11]=useState(true)
+  const [error12,setError12]=useState(true)
+  const [error13,setError13]=useState(true)
+  const [error14,setError14]=useState(true)
+  const [error15,setError15]=useState(true)
   let [mobile, setMobile] = useState("");
   let [eng_name, setEng_name] = useState("");
   let [cust_name, setCust_name] = useState("");
@@ -136,15 +150,33 @@ let[id,setId]=useState('');
     if(resp){
     console.log(resp.data);
     }
+    await getData()
+    setMobile("")
+    setEng_name("")
+    setCust_name("")
+    setContactor_mobile("")
+    setContactor_name("")
+    setPlace("")
+    setCity("")
+    setState_of_work("")
+    setNo_of_storey("")
+    setBrand("")
+    setVisit_egg_name("")
+    setVisit_egg_mobile("")
+    setMeeting("")
+    setDate("")
+    setComment("")
     setIsLoading(false)
   }
-
+async function getData(){
+  let result = await axios.get("http://localhost:5800/backend/show");
+    // console.log(result.data.records);
+    setProduct([...result.data.records]);
+}
   useEffect(() => {
     async function res() {
       setIsLoading(true)
-      let result = await axios.get("http://localhost:5800/backend/show");
-    console.log(result.data.records);
-    setProduct([...result.data.records]);
+      await getData()
     // setTimeout(()=> setIsLoading(false),2000)
      setIsLoading(false)
     }
@@ -171,7 +203,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="number"
                         placeholder="Enter mobile no."
-                        onChange={(e) =>{ setMobile(e.target.value);e.target.value? setError(false) : setError(true)}}
+                        onChange={(e) =>{ setMobile(e.target.value);e.target.value? setError1(false) : setError1(true)}}
                         value={mobile}
                         required
                       />
@@ -181,7 +213,7 @@ let[id,setId]=useState('');
                       <Form.Label htmlFor="Select">Engineer Name</Form.Label>
                       <Form.Select
                         id="Select"
-                        onChange={(e) => setEng_name(e.target.value)}
+                        onChange={(e) => {setEng_name(e.target.value);e.target.value? setError2(false) : setError2(true)}}
                         value={eng_name}
                       >
                         <option>Something</option>
@@ -198,7 +230,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="text"
                         placeholder="Customer Name"
-                        onChange={(e) => setCust_name(e.target.value)}
+                        onChange={(e) => {setCust_name(e.target.value);e.target.value? setError3(false) : setError3(true)}}
                         value={cust_name}
                       />
                     </Form.Group>
@@ -210,7 +242,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="number"
                         placeholder="Contactor Mobile"
-                        onChange={(e) => setContactor_mobile(e.target.value)}
+                        onChange={(e) => {setContactor_mobile(e.target.value);e.target.value? setError4(false) : setError4(true)}}
                         value={contactor_mobile}
                       />
                     </Form.Group>
@@ -222,7 +254,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="text"
                         placeholder="Contactor Name"
-                        onChange={(e) => setContactor_name(e.target.value)}
+                        onChange={(e) => {setContactor_name(e.target.value);e.target.value? setError5(false) : setError5(true)}}
                         value={contactor_name}
                       />
                     </Form.Group>
@@ -231,7 +263,7 @@ let[id,setId]=useState('');
                       <Form.Label htmlFor="Select">Select Place</Form.Label>
                       <Form.Select
                         id="Select"
-                        onChange={(e) => setPlace(e.target.value)}
+                        onChange={(e) => {setPlace(e.target.value);e.target.value? setError6(false) : setError6(true)}}
                         value={place}
                       >
                         <option>Select</option>
@@ -244,7 +276,7 @@ let[id,setId]=useState('');
                       <Form.Label htmlFor="Select">Select City</Form.Label>
                       <Form.Select
                         id="Select"
-                        onChange={(e) => setCity(e.target.value)}
+                        onChange={(e) => {setCity(e.target.value);e.target.value? setError7(false) : setError7(true)}}
                         value={city}
                       >
                         <option>Select</option>
@@ -261,7 +293,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="text"
                         placeholder="State of work"
-                        onChange={(e) => setState_of_work(e.target.value)}
+                        onChange={(e) => {setState_of_work(e.target.value);e.target.value? setError8(false) : setError8(true)}}
                         value={state_of_work}
                       />
                     </Form.Group>
@@ -274,7 +306,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="number"
                         placeholder="No of Storey"
-                        onChange={(e) => setNo_of_storey(e.target.value)}
+                        onChange={(e) => {setNo_of_storey(e.target.value);e.target.value? setError9(false) : setError9(true)}}
                         value={no_of_storey}
                       />
                     </Form.Group>
@@ -283,7 +315,7 @@ let[id,setId]=useState('');
                       <Form.Label htmlFor="Select">Select Brand</Form.Label>
                       <Form.Select
                         id="Select"
-                        onChange={(e) => setBrand(e.target.value)}
+                        onChange={(e) => {setBrand(e.target.value);e.target.value? setError10(false) : setError10(true)}}
                         value={brand}
                       >
                         <option>Select</option>
@@ -300,7 +332,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="text"
                         placeholder="Visit Egg Name"
-                        onChange={(e) => setVisit_egg_name(e.target.value)}
+                        onChange={(e) => {setVisit_egg_name(e.target.value);e.target.value? setError11(false) : setError11(true)}}
                         value={visit_egg_name}
                       />
                     </Form.Group>
@@ -313,7 +345,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="text"
                         placeholder="Visit Egg mobile"
-                        onChange={(e) => setVisit_egg_mobile(e.target.value)}
+                        onChange={(e) => {setVisit_egg_mobile(e.target.value);e.target.value? setError12(false) : setError12(true)}}
                         value={visit_egg_mobile}
                       />
                     </Form.Group>
@@ -322,7 +354,7 @@ let[id,setId]=useState('');
                       <Form.Label htmlFor="Select">Select Meeting</Form.Label>
                       <Form.Select
                         id="Select"
-                        onChange={(e) => setMeeting(e.target.value)}
+                        onChange={(e) => {setMeeting(e.target.value);e.target.value? setError13(false) : setError13(true)}}
                         value={meeting}
                       >
                         <option>Select</option>
@@ -335,7 +367,7 @@ let[id,setId]=useState('');
                       <Form.Control
                         type="Date"
                         placeholder="Date"
-                        onChange={(e) => setDate(e.target.value)}
+                        onChange={(e) => {setDate(e.target.value);e.target.value? setError14(false) : setError14(true)}}
                         value={date}
                       />
                     </Form.Group>
@@ -349,7 +381,7 @@ let[id,setId]=useState('');
                           as="textarea"
                           placeholder="Leave a comment here"
                           style={{ height: "100px" }}
-                          onChange={(e) => setComment(e.target.value)}
+                          onChange={(e) => {setComment(e.target.value);e.target.value? setError15(false) : setError15(true)}}
                           value={comment}
                         />
                       </FloatingLabel>
@@ -359,7 +391,7 @@ let[id,setId]=useState('');
                       variant="primary"
                       type="submit"
                       onClick={handleClick}
-                      disabled={error}
+                      disabled={error1 || error2 ||error3 ||error4 ||error5  ||error6 ||error7 ||error8 ||error9 ||error10 ||error11 ||error12 ||error13 ||error14 ||error15}
                     >
                       Submit
                     </Button>

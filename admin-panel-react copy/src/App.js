@@ -12,6 +12,7 @@ import City from "./components/City";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import LandingPage from "./components/LandingPage";
+import UserDashboard from "./components/user/UserDashboard";
 // import Loader from "./components/Loader";
 
 function App() {
@@ -31,6 +32,7 @@ const pathName=location.pathname;
         <Route path="/leadview" element={token?<Leadview />:<Navigate to="/login" replace/>} />
         <Route path="/place" element={token?<Place />:<Navigate to="/login" replace/>} />
         <Route path="/city" element={token?<City />:<Navigate to="/login" replace/>} />
+        <Route path="/userdashboard" element={token?<UserDashboard/>:<Navigate to="/login" replace/>} />
         
         <Route path="/login" element={token? <Navigate to="/content" replace/>:<Login />} />
         <Route path="/signup" element={token? <Navigate to="/content" replace/>:<Signup />} />

@@ -323,14 +323,14 @@ BackendRouter.post('/userAuth', (req, res) => {
               let val= await bcrypt.compare(password+"", hasedpassword)
           if(val){
             // res.json({message:"authenticated"})
-
+console.log(category);
             const accessToken = await createAccessJwt(email);
                 const refreshToken = await createRefreshJwt(email);
                 res.json({
                     user:{email,category},
                     accessToken,
                     refreshToken,
-                    message:"authenticated"
+                    message:category=="Admin"? "admin_authenticated" :"user_Authenticated"
                     
                     
                 })
