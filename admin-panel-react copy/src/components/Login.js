@@ -32,7 +32,7 @@ export default function Login() {
     if (resp.data.message === "admin_authenticated") {
       // localStorage.setItem("isAuthenticated",true)
       localStorage.setItem("token", resp.data.accessToken);
-
+localStorage.setItem("type","admin")
       // let res= await axios.get("http://localhost:5800/backend/validate", {//not required to validate
       //   headers: {
       //     "x-access-token": localStorage.getItem("token")
@@ -42,6 +42,7 @@ export default function Login() {
     }
     else if (resp.data.message === "user_Authenticated") {
       localStorage.setItem("token", resp.data.accessToken);
+      localStorage.setItem("type","user")
       navigate("/userdashboard");
     }
 
