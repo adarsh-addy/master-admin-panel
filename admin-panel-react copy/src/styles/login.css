@@ -1,10 +1,16 @@
 
   .login{
-    height: 100%;
+    min-height: 100vh;
+    max-width: 100vw;
     margin:0;
     padding:0;
     font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+    /* background: linear-gradient(#141e30, #243b55); */
+    background-color: #0F3D3E;
+    background-image: url("../images/img1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: lighten;
   }
   
   .login-box {
@@ -77,6 +83,11 @@
     font-size: 12px;
   }
   
+  .user-box Link{
+    position: absolute;
+   
+  }
+
   /* .login-box form a {
     position: relative;
     display: inline-block;

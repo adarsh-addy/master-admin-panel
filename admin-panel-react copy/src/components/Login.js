@@ -4,7 +4,10 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/login.css";
 
+
+
 export default function Login() {
+
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [category, setCategory] = useState("");
@@ -95,7 +98,9 @@ localStorage.setItem("type","admin")
           </div>
 
           <div className="user-box">
-            <Link to="/signup">Add new account</Link>
+            <div className="login_link">
+            <Link to="/signup">Registration for new account</Link>
+            </div>
           </div>
           <br />
           <br />

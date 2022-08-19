@@ -23,9 +23,9 @@ export default function LandingPage() {
         <p>Our dedicated emerging technologies "Centers of Excellence" enable us to harness the latest technology for delivering business capability to our clients.</p>
       <a href="http://surl.li/cscfp"> <button>Reach Us </button></a>
       </div>
-      <div className="image">
+      {/* <div className="image">
         <img src="https://i.postimg.cc/65QxYYzh/001234.png" alt='' />
-      </div>
+      </div> */}
       <div className="clearfix"></div>
     </div>
   </div></div>

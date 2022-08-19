@@ -81,7 +81,7 @@ export default function Signup() {
           </div>
 
           <div className="user-box">
-            <Link to="/login">Account already existed</Link>
+            <Link to="/login">Account Already Registered</Link>
           </div>
           <br />
           <br />
