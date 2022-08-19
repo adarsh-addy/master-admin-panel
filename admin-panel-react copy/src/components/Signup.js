@@ -48,14 +48,16 @@ export default function Signup() {
             <label>Name</label>
           </div>
 
-          <select
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          >
-            <option>Select</option>
-            <option>Admin</option>
-            <option>User</option>
-          </select>
+          <div className="select_opt">
+            <select
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+            >
+              <option>Select</option>
+              <option>Admin</option>
+              <option>User</option>
+            </select>
+          </div>
           <br />
           <br />
           <br />
@@ -69,6 +71,7 @@ export default function Signup() {
             />
             <label>Email</label>
           </div>
+          <br />
           <div className="user-box">
             <input
               type="password"

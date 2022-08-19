@@ -4,10 +4,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/login.css";
 
-
-
 export default function Login() {
-
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [category, setCategory] = useState("");
@@ -27,29 +24,26 @@ export default function Login() {
         // console.log(err.response.data.message);
       });
     if (resp) {
-     console.log(resp.data);
-    //  console.log(resp.data.message.split(" ")[0]);
-      alert(resp.data.message)
+      console.log(resp.data);
+      //  console.log(resp.data.message.split(" ")[0]);
+      alert(resp.data.message);
     }
 
     if (resp.data.message === "admin_authenticated") {
       // localStorage.setItem("isAuthenticated",true)
       localStorage.setItem("token", resp.data.accessToken);
-localStorage.setItem("type","admin")
+      localStorage.setItem("type", "admin");
       // let res= await axios.get("http://localhost:5800/backend/validate", {//not required to validate
       //   headers: {
       //     "x-access-token": localStorage.getItem("token")
       //   }
       // })
       navigate("/content");
-    }
-    else if (resp.data.message === "user_Authenticated") {
+    } else if (resp.data.message === "user_Authenticated") {
       localStorage.setItem("token", resp.data.accessToken);
-      localStorage.setItem("type","user")
+      localStorage.setItem("type", "user");
       navigate("/userdashboard");
-    }
-
-     else if (resp.data.message === "User does not exist") {
+    } else if (resp.data.message === "User does not exist") {
       navigate("/signup");
     }
   }
@@ -74,18 +68,19 @@ localStorage.setItem("type","admin")
             <label>Username</label>
           </div>
 
-          <select
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          >
-            <option>Select</option>
-            <option>Admin</option>
-            <option>User</option>
-          </select>
+          <div className="select_opt">
+            <select
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+            >
+              <option className="opt_li">Select</option>
+              <option className="opt_li">Admin</option>
+              <option className="opt_li">User</option>
+            </select>
+          </div>
           <br />
           <br />
           <br />
-
           <div className="user-box">
             <input
               type="password"
@@ -99,7 +94,7 @@ localStorage.setItem("type","admin")
 
           <div className="user-box">
             <div className="login_link">
-            <Link to="/signup">Registration for new account</Link>
+              <Link to="/signup">Registration for new account</Link>
             </div>
           </div>
           <br />
