@@ -1,11 +1,16 @@
 import React from "react";
 import "../styles/landingpage.css";
 import { Link } from "react-router-dom";
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
 
 export default function LandingPage() {
   return (
+    <ThemeProvider
+  breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+  minBreakpoint="xxs"
+>
     <div className="landing_page">
-      <div className="landing-page">
+      <div className="landing-page container-{width:100%}">
         <div className="container">
           <div className="header-area">
             <div className="logo">
@@ -33,7 +38,7 @@ export default function LandingPage() {
             </p>
             <a href="http://surl.li/cscfp">
               {" "}
-              <button>Reach Us </button>
+              <button className="btn">Reach Us </button>
             </a>
           </div>
           {/* <div className="image">
@@ -43,5 +48,6 @@ export default function LandingPage() {
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 }

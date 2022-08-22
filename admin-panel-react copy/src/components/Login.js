@@ -48,7 +48,7 @@ export default function Login() {
     }
   }
   return (
-    <div className="login">
+    <div className="login container-fluid">
       <div className="login-box">
         <h2>Login</h2>
         <a href="/">

@@ -14,11 +14,116 @@
   line-height: 1;
 }
 
-.login-box {
+@media (max-width: 575.98px) and (max-width: 767.98px) and (max-width: 991.98px) and (max-width: 1199.98px) and (max-width: 1399.98px) {
+  .signup {
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    /* background: linear-gradient(#141e30, #243b55); */
+    background-color: #0f3d3e;
+    background-image: url("../images/img1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: lighten;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+}
+
+/* // `xs` returns only a ruleset and no media query */
+
+/* // `sm` applies to x-small devices (portrait phones, less than 576px) */
+/* @media (max-width: 575.98px) {  .signup{
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: #0f3d3e;
+  background-image: url("../images/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  letter-spacing: 3px;
+  line-height: 1;
+} } */
+
+/* // `md` applies to small devices (landscape phones, less than 768px) */
+/* @media (max-width: 767.98px) {  .signup{
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+  background-color: #0f3d3e;
+  background-image: url("../images/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  letter-spacing: 3px;
+  line-height: 1;
+}} */
+
+/* // `lg` applies to medium devices (tablets, less than 992px) */
+/* @media (max-width: 991.98px) {  .signup{
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+  background-color: #0f3d3e;
+  background-image: url("../images/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  letter-spacing: 3px;
+  line-height: 1;
+} } */
+
+/* // `xl` applies to large devices (desktops, less than 1200px) */
+/* @media (max-width: 1199.98px) { .signup{
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+ 
+  background-color: #0f3d3e;
+  background-image: url("../images/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  letter-spacing: 3px;
+  line-height: 1;
+}} */
+
+/* // `xxl` applies to x-large devices (large desktops, less than 1400px) */
+/* @media (max-width: 1399.98px) {  .signup{
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+ 
+  background-color: #0f3d3e;
+  background-image: url("../images/img1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: lighten;
+  letter-spacing: 3px;
+  line-height: 1;
+} } */
+
+.signup-box {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 400px;
+  width: 360px;
+  min-height: 500px;
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.5);
@@ -27,7 +132,7 @@
   border-radius: 10px;
 }
 
-.login-box .exit_x {
+.signup-box .exit_x {
   position: relative;
   left: 95%;
   /* background: transparent; */
@@ -46,18 +151,18 @@
   border-radius: 5px;
 }
 
-.login-box h2 {
+.signup-box h2 {
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
   text-align: center;
 }
 
-.login-box .user-box {
+.signup-box .user-box {
   position: relative;
 }
 
-.login-box .user-box input {
+.signup-box .user-box input {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -70,7 +175,7 @@
   letter-spacing: 2px;
   border-radius: 5px;
 }
-.login-box .user-box label {
+.signup-box .user-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -81,8 +186,8 @@
   transition: 0.5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.signup-box .user-box input:focus ~ label,
+.signup-box .user-box input:valid ~ label {
   top: -30px;
   left: 0;
   color: #03e9f4;
@@ -100,7 +205,7 @@
   border-radius: 5px;
 }
 
-/* .login-box form a {
+/* .signup-box form a {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -114,7 +219,7 @@
     letter-spacing: 4px
   }
   
-  .login-box a:hover {
+  .signup-box a:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 5px;
@@ -124,12 +229,12 @@
                 0 0 100px #03e9f4;
   }
   
-  .login-box a span {
+  .signup-box a span {
     position: absolute;
     display: block;
   }
   
-  .login-box a span:nth-child(1) {
+  .signup-box a span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -147,7 +252,7 @@
     }
   }
   
-  .login-box a span:nth-child(2) {
+  .signup-box a span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -166,7 +271,7 @@
     }
   }
   
-  .login-box a span:nth-child(3) {
+  .signup-box a span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -185,7 +290,7 @@
     }
   }
   
-  .login-box a span:nth-child(4) {
+  .signup-box a span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;

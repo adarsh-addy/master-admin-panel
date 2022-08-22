@@ -28,8 +28,8 @@ export default function Signup() {
     }
   }
   return (
-    <div className="signup">
-      <div className="login-box">
+    <div className="signup container-fluid">
+      <div className="signup-box">
         <h2>SignUp</h2>
         <a href="/">
           {" "}
