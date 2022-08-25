@@ -192,7 +192,7 @@ async function getData(){
   return (
 
      <div className="customer-details">
-      <div className="container-sm w-50">
+      <div className="container-sm w-63">
         <div className="row">
           <div className="col">
             <Card body className="mt-4">

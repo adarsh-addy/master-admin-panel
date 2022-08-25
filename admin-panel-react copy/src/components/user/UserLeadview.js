@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -38,7 +40,7 @@ export default function UserLeadview() {
   else{
   return (
     <div className="leadview">
-      <div className="container-sm w-50">
+      <div className="container-sm w-63">
 
         <div className="row">
           <div className="col">
@@ -83,39 +85,41 @@ export default function UserLeadview() {
         <div className="row ">
           <div className="col">
             <div className="card">
-              <div className="card-body">
-                <table className="table table-striped">
-                  <thead>
-                    <th>ID</th>
-                    <th>Mobile</th>
-                    <th>Engineer Name</th>
-                    <th>Customer Name</th>
-                    <th>Place</th>
-                    <th>City</th>
-                    <th>Meeting</th>
-                    <th>Brand</th>
-                  </thead>
-                  <tbody>
+            <div className="card-body Table-responsive">
+                <Table className="Table">
+                  <Thead>
+                    <Tr>
+                    <Th>ID</Th>
+                    <Th>Mobile</Th>
+                    <Th>Engineer</Th>
+                    <Th>Customer</Th>
+                    <Th>Place</Th>
+                    <Th>City</Th>
+                    <Th>Meeting</Th>
+                    <Th>Brand</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {product.length !== 0 ? (
                       product.map((ele, idx) => {
                         return (
-                          <tr key={idx}>
-                            <td>{ele.id}</td>
-                            <td>{ele.mobile_num}</td>
-                            <td>{ele.eng_name}</td>
-                            <td>{ele.cust_name}</td>
-                            <td>{ele.place}</td>
-                            <td>{ele.city}</td>
-                            <td>{ele.meeting}</td>
-                            <td>{ele.brand}</td>
-                          </tr>
+                          <Tr key={idx}>
+                            <Td>{ele.id}</Td>
+                            <Td>{ele.mobile_num}</Td>
+                            <Td>{ele.eng_name}</Td>
+                            <Td>{ele.cust_name}</Td>
+                            <Td>{ele.place}</Td>
+                            <Td>{ele.city}</Td>
+                            <Td>{ele.meeting}</Td>
+                            <Td>{ele.brand}</Td>
+                          </Tr>
                         );
                       })
                     ) : (
-                      <tr>NO data</tr>
+                      <Tr><Td>NO data</Td></Tr>
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
             </div>
           </div>

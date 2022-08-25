@@ -13,6 +13,7 @@ export default function UserNavbar() {
     let navigate = useNavigate();
     function logOut(){
       localStorage.removeItem("token");
+      localStorage.removeItem("type");
       navigate("/login")
     
     }
