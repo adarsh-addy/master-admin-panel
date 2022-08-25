@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ThemeProvider from 'react-bootstrap/ThemeProvider'
 
 export default function LandingPage() {
-  let navigate = useNavigate();
+  let navigate = useNavigate();//here we firstly logout the admin or user panel then navigate to login also it prevent from open login state and forget about it ,then it work
   function logOut(){
     localStorage.removeItem("token");
     localStorage.removeItem("type");
