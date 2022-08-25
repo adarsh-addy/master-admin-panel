@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -23,7 +23,7 @@ export default function UserNavbar() {
             <Navbar key={expand} bg="info" expand={expand} className="">
               <Container fluid>
                 <Navbar.Brand href="/userdashboard">User Panel</Navbar.Brand>
-                <Form className="d-flex ">
+                {/* <Form className="d-flex ">
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -31,7 +31,7 @@ export default function UserNavbar() {
                   aria-label="Search"
                 />
                 <Button variant="outline-primary"><strong>Search</strong></Button>
-              </Form>
+              </Form> */}
                 <button type="button" className="btn btn-primary"onClick={logOut}>Logout</button>
     
     

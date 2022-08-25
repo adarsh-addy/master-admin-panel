@@ -241,7 +241,7 @@ sup {
 
 a {
   color: var(--bs-link-color);
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
   color: var(--bs-link-hover-color);
@@ -2275,7 +2275,7 @@ textarea.form-control-lg {
      -moz-appearance: none;
           appearance: none;
   -webkit-print-color-adjust: exact;
-     accent-color: exact;
+     color-adjust: exact;
           print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {

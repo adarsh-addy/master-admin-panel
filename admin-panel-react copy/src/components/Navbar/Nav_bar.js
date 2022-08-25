@@ -22,7 +22,7 @@ function logOut(){
         <Navbar key={expand} bg="info" expand={expand} className="">
           <Container fluid>
             <Navbar.Brand href="/content">Admin Panel</Navbar.Brand>
-            <Form className="d-flex ">
+            {/* <Form className="d-flex " id="search-bar">
             <Form.Control
               type="search"
               placeholder="Search"
@@ -30,7 +30,7 @@ function logOut(){
               aria-label="Search"
             />
             <Button variant="outline-primary"><strong>Search</strong></Button>
-          </Form>
+          </Form> */}
             <button type="button" className="btn btn-primary"onClick={logOut}>Logout</button>
 
 

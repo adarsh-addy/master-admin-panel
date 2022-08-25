@@ -58,9 +58,8 @@ export default function Signup() {
               <option>User</option>
             </select>
           </div>
-          <br />
-          <br />
-          <br />
+          <br/>
+         
           <div className="user-box">
             <input
               type="text"
@@ -71,7 +70,7 @@ export default function Signup() {
             />
             <label>Email</label>
           </div>
-          <br />
+          
           <div className="user-box">
             <input
               type="password"
@@ -87,7 +86,7 @@ export default function Signup() {
             <Link to="/login">Account Already Registered</Link>
           </div>
           <br />
-          <br />
+         
           {/* <a href="/#" >
       <span></span>
       <span></span>

@@ -1,9 +1,18 @@
 import React from "react";
 import "../styles/landingpage.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import ThemeProvider from 'react-bootstrap/ThemeProvider'
 
 export default function LandingPage() {
+  let navigate = useNavigate();
+  function logOut(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("type");
+    navigate("/login")
+  
+  }
+
   return (
     <ThemeProvider
   breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -14,16 +23,16 @@ export default function LandingPage() {
         <div className="container">
           <div className="header-area">
             <div className="logo">
-              Admin <b>Website</b>
+              Admin &nbsp;<b>Website</b>
             </div>
             <ul className="links">
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Work</li>
-              <li>Info</li>
-              <Link to="/login">
+              <li className="link1">Home</li>
+              <li className="link1">About Us</li>
+              <li className="link1">Work</li>
+              <li className="link1">Info</li>
+              <button onClick={logOut}>
                 <li>Login</li>
-              </Link>
+              </button>
               <Link to="/signup">
                 <li>Signup</li>
               </Link>
