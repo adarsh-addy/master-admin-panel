@@ -20,6 +20,7 @@ import UserEngineer from "./components/user/UserEngineer";
 import UserLeadview from "./components/user/UserLeadview";
 import UserPlace from "./components/user/UserPlace";
 import UserCity from "./components/user/UserCity";
+import Pagenotfound from "./components/Pagenotfound";
 // import Loader from "./components/Loader";
 
 function App() {
@@ -45,6 +46,7 @@ let isUserNavbar=!(pathName.includes('/login')
 
       <Routes>
       <Route path="/" element={<LandingPage/>} />
+      <Route path="/*" element={<Pagenotfound/>} />
 
       {/* admin section */}
         <Route path="/content" element={token && admin==="admin" ? <Content1 />:<Navigate to="/login" replace/>} />

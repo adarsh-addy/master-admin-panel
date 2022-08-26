@@ -36,7 +36,12 @@ app.use('/backend',BackendRouter);
 //     errorHandler(error,res)
 // })
 // ********************************************************************************************
-
+app.use('*', (req, res) => {
+    
+    res.status(404).send("route not found")
+      // res.sendStatus(404)
+  
+  })
 
 const Port=process.env.PORT || 5800;
 
