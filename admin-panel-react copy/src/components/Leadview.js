@@ -13,6 +13,8 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import "../styles/leadview.css";
 
 export default function Leadview() {
+  const [error1,setError1]=useState(true)
+  const [error2,setError2]=useState(true)
   const [product, setProduct] = useState([]);
   let [fromdate, setFromDate] = useState("");
   let [todate, setToDate] = useState("");
@@ -28,9 +30,16 @@ export default function Leadview() {
     let result = await axios.post("http://localhost:5800/backend/date", {
       fromdate,
       todate,
+    }).catch((err)=>{
+      console.log(err.response.data.message);
+      alert(err.response.data.message);
     });
-    console.log(result.data.records);
+    if(result){
+      console.log(result.data.records);
+      alert("Record Loaded successfully");
     setProduct([...result.data.records]);
+      }
+    
     setIsLoading(false)
   }
 
@@ -54,7 +63,7 @@ export default function Leadview() {
                       <Form.Control
                         type="Date"
                         placeholder="Date"
-                        onChange={(e) => setFromDate(e.target.value)}
+                        onChange={(e) =>{setFromDate(e.target.value);e.target.value? setError1(false) : setError1(true)}}
                       />
                     </Form.Group>
 
@@ -63,7 +72,7 @@ export default function Leadview() {
                       <Form.Control
                         type="Date"
                         placeholder="Date"
-                        onChange={(e) => setToDate(e.target.value)}
+                        onChange={(e) => {setToDate(e.target.value);e.target.value? setError2(false) : setError2(true)}}
                       />
                     </Form.Group>
 
@@ -71,6 +80,7 @@ export default function Leadview() {
                       variant="primary"
                       type="submit"
                       onClick={handleClick}
+                      disabled={error1 || error2}
                     >
                       Show
                     </Button>

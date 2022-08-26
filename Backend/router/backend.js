@@ -34,7 +34,11 @@ BackendRouter.post("/save", async (req, res) => {
   const date = req.body.date;
   const comment = req.body.comment;
   // const encryptpassword=await bcrypt.hash(password,8);
-
+  if(!mobile && !eng_name && !cust_name && !contactor_mobile && !contactor_name && !place && !city && !state_of_work && !no_of_storey && !brand && !visit_egg_name && !visit_egg_mobile && !meeting && !date && !comment){
+    return res.status(400).send({
+       message:"Invalid all details"
+     })
+   }
   // callback og getconnection is type of promise return type of callback.
   db.getConnection(async (err, connection) => {
     if (err) throw err;
@@ -110,9 +114,9 @@ BackendRouter.patch("/update", async (req, res) => {
   const meeting = req.body.meeting;
   const date = req.body.date;
   const comment = req.body.comment;
-  if(!id && !mobile ){
+  if(!id && !mobile && !eng_name && !cust_name && !contactor_mobile && !contactor_name && !place && !city && !state_of_work && !no_of_storey && !brand && !visit_egg_name && !visit_egg_mobile && !meeting && !date && !comment){
    return res.status(400).send({
-      message:"Invalid id & mobile no."
+      message:"Invalid id & all details"
     })
   }
   
@@ -133,6 +137,11 @@ BackendRouter.patch("/update", async (req, res) => {
 
 BackendRouter.post("/idresult", (req, res) => {
   const id = req.body.id;
+  if(!id){
+    return res.status(400).send({
+       message:"Invalid id "
+     })
+   }
   console.log("--->id", id);
   // let password=req.body.password;
   db.getConnection(async (err, connection) => {
@@ -169,6 +178,11 @@ BackendRouter.get("/show", async (req, res) => {
 BackendRouter.post("/engineername", (req, res) => {
   const eng_name = req.body.eng_name;
   // let password=req.body.password;
+  if(!eng_name){
+    return res.status(400).send({
+       message:"Invalid Engineering name "
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM customer_details WHERE eng_name='${eng_name}'`;
@@ -189,6 +203,11 @@ BackendRouter.post("/date", (req, res) => {
   const todate = req.body.todate;
   console.log("fromdate",fromdate,"todate",todate);
   // let password=req.body.password;
+  if(!fromdate && !todate){
+    return res.status(400).send({
+       message:"Invalid date "
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM customer_details WHERE date_of BETWEEN '${fromdate}' AND '${todate}'`;
@@ -207,6 +226,11 @@ BackendRouter.post("/date", (req, res) => {
 BackendRouter.post("/place", (req, res) => {
   const place = req.body.place;
   // let password=req.body.password;
+  if(!place){
+    return res.status(400).send({
+       message:"Invalid Place "
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM customer_details WHERE place='${place}'`;
@@ -225,6 +249,11 @@ BackendRouter.post("/place", (req, res) => {
 BackendRouter.post("/city", (req, res) => {
   const city = req.body.city;
   // let password=req.body.password;
+  if(!city){
+    return res.status(400).send({
+       message:"Invalid City "
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM customer_details WHERE city='${city}'`;
@@ -240,6 +269,8 @@ BackendRouter.post("/city", (req, res) => {
   });
 });
 
+
+//user id and password also for admin
 BackendRouter.post('/user',async (req, res) => {
   const name= req.body.name;
   const category=req.body.category;
@@ -323,7 +354,7 @@ BackendRouter.post('/userAuth', (req, res) => {
               let val= await bcrypt.compare(password+"", hasedpassword)
           if(val){
             // res.json({message:"authenticated"})
-console.log(category);
+            console.log(category);
             const accessToken = await createAccessJwt(email);
                 const refreshToken = await createRefreshJwt(email);
                 res.json({
@@ -371,7 +402,11 @@ BackendRouter.post("/userSave", async (req, res) => {
   const date = req.body.date;
   const comment = req.body.comment;
   // const encryptpassword=await bcrypt.hash(password,8);
-
+  if(!mobile && !eng_name && !cust_name && !contactor_mobile && !contactor_name && !place && !city && !state_of_work && !no_of_storey && !brand && !visit_egg_name && !visit_egg_mobile && !meeting && !date && !comment){
+    return res.status(400).send({
+       message:"Invalid all details"
+     })
+   }
   // callback og getconnection is type of promise return type of callback.
   db.getConnection(async (err, connection) => {
     if (err) throw err;
@@ -447,11 +482,11 @@ BackendRouter.patch("/userUpdate", async (req, res) => {
   const meeting = req.body.meeting;
   const date = req.body.date;
   const comment = req.body.comment;
-  if(!id && !mobile ){
-   return res.status(400).send({
-      message:"Invalid id & mobile no."
-    })
-  }
+  if(!id && !mobile && !eng_name && !cust_name && !contactor_mobile && !contactor_name && !place && !city && !state_of_work && !no_of_storey && !brand && !visit_egg_name && !visit_egg_mobile && !meeting && !date && !comment){
+    return res.status(400).send({
+       message:"Invalid all details"
+     })
+   }
   
   db.getConnection(async (err, connection) => {
     if (err) throw err;
@@ -472,6 +507,11 @@ BackendRouter.post("/userIdresult", (req, res) => {
   const id = req.body.id;
   console.log("--->id", id);
   // let password=req.body.password;
+  if(!id){
+    return res.status(400).send({
+       message:"Invalid id"
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM usercustomerdetails WHERE id='${id}'`;
@@ -506,6 +546,11 @@ BackendRouter.get("/userShow", async (req, res) => {
 BackendRouter.post("/userEngineername", (req, res) => {
   const eng_name = req.body.eng_name;
   // let password=req.body.password;
+  if(!eng_name){
+    return res.status(400).send({
+       message:"Invalid Engineer Name"
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM usercustomerdetails WHERE eng_name='${eng_name}'`;
@@ -526,6 +571,11 @@ BackendRouter.post("/userDate", (req, res) => {
   const todate = req.body.todate;
   console.log("fromdate",fromdate,"todate",todate);
   // let password=req.body.password;
+  if(!fromdate && !todate){
+    return res.status(400).send({
+       message:"Invalid date"
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM usercustomerdetails WHERE date_of BETWEEN '${fromdate}' AND '${todate}'`;
@@ -544,6 +594,11 @@ BackendRouter.post("/userDate", (req, res) => {
 BackendRouter.post("/userPlace", (req, res) => {
   const place = req.body.place;
   // let password=req.body.password;
+  if(!place){
+    return res.status(400).send({
+       message:"Invalid place"
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM usercustomerdetails WHERE place='${place}'`;
@@ -562,6 +617,11 @@ BackendRouter.post("/userPlace", (req, res) => {
 BackendRouter.post("/userCity", (req, res) => {
   const city = req.body.city;
   // let password=req.body.password;
+  if(!city){
+    return res.status(400).send({
+       message:"Invalid city"
+     })
+   }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = `SELECT * FROM usercustomerdetails WHERE city='${city}'`;

@@ -12,6 +12,7 @@ import Loader from "../Loader";
 import "../../styles/engineermaster.css";
 
 export default function UserPlace() {
+  const [error,setError]=useState(true)
   const [product, setProduct] = useState([]);
   let [place, setPlace] = useState("");
   console.log(place);
@@ -24,9 +25,16 @@ export default function UserPlace() {
     let result = await axios.post(
       "http://localhost:5800/backend/userPlace",
       { place }
-    );
-    console.log(result.data.records);
-    setProduct([...result.data.records]);
+    ).catch((err)=>{
+      console.log(err.response);
+      alert(err.response.data.message);
+    });
+    if(result){
+      console.log(result.data.records);
+      alert("Record Loaded successfully");
+      // console.log(result.data.records);
+      setProduct([...result.data.records]);
+      };
     setIsLoading(false)
   }
 
@@ -49,7 +57,7 @@ export default function UserPlace() {
                         <Form.Label htmlFor="Select">Place</Form.Label>
                         <Form.Select
                           id="Select"
-                          onChange={(e) => setPlace(e.target.value)}
+                          onChange={(e) => {setPlace(e.target.value);e.target.value? setError(false) : setError(true)}}
                         >
                           <option>Something</option>
                           <option>Select1</option>
@@ -61,6 +69,7 @@ export default function UserPlace() {
                         variant="primary"
                         type="submit"
                         onClick={handleClick}
+                        disabled={error}
                       >
                         Submit
                       </Button>

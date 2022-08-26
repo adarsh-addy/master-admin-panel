@@ -81,10 +81,32 @@ const[isLoading,setIsLoading]=useState(false);
       meeting,
       date,
       comment,
+    }).catch((err)=>{//here we applying an error condition to using a update so we using catch for This to handle an error issue
+      // console.log(err.response.data);
+      alert(err.response.data.message);
     });
+    if(resp){
     console.log(resp.data);
+    alert("Record inserted successfully");
+    };
+    // console.log(resp.data);
     let result = await axios.get("http://localhost:5800/backend/userShow");
     console.log(result.data.records);
+    setMobile("")
+    setEng_name("")
+    setCust_name("")
+    setContactor_mobile("")
+    setContactor_name("")
+    setPlace("")
+    setCity("")
+    setState_of_work("")
+    setNo_of_storey("")
+    setBrand("")
+    setVisit_egg_name("")
+    setVisit_egg_mobile("")
+    setMeeting("")
+    setDate("")
+    setComment("")
     setProduct([...result.data.records]);
     // setTimeout(()=> setIsLoading(false),1000)
     setIsLoading(false)
@@ -105,6 +127,7 @@ let[id,setId]=useState('');
       id: idx,
     });
     console.log(idResult.data.records[0]);
+    alert("Record has been filled")
     const customer_data = idResult.data.records[0];
     setMobile(customer_data.mobile_num); //--->mobile_num is database column name & also we again overwrite the used for incoming use
     setEng_name(customer_data.eng_name);
@@ -145,12 +168,13 @@ let[id,setId]=useState('');
       meeting,
       date,
       comment,
-    }).catch((err)=>{//here we applying an error condition to using a update so we using catch for this to handle an error issue
+    }).catch((err)=>{//here we applying an error condition to using a update so we using catch for This to handle an error issue
       // console.log(err.response.data);
       alert(err.response.data.message);
     });
     if(resp){
     console.log(resp.data);
+    alert("Record updated successfully");
     }
     await getData()
     setMobile("")

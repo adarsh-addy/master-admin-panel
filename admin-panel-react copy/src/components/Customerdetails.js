@@ -81,10 +81,33 @@ const[isLoading,setIsLoading]=useState(false);
       meeting,
       date,
       comment,
+    }).catch((err)=>{//here we applying an error condition to using a update so we using catch for This to handle an error issue
+      // console.log(err.response.data);
+      alert(err.response.data.message);
     });
+    if(resp){
     console.log(resp.data);
+    alert("Record inserted successfully");
+    };
+    // console.log(resp.data);
     let result = await axios.get("http://localhost:5800/backend/show");
     console.log(result.data.records);
+    // let result=await getData()
+    setMobile("")
+    setEng_name("")
+    setCust_name("")
+    setContactor_mobile("")
+    setContactor_name("")
+    setPlace("")
+    setCity("")
+    setState_of_work("")
+    setNo_of_storey("")
+    setBrand("")
+    setVisit_egg_name("")
+    setVisit_egg_mobile("")
+    setMeeting("")
+    setDate("")
+    setComment("")
     setProduct([...result.data.records]);
     // setTimeout(()=> setIsLoading(false),1000)
     setIsLoading(false)
@@ -98,13 +121,15 @@ const[isLoading,setIsLoading]=useState(false);
   // let idResult= await axios.post("http://localhost:5800/backend/idresult",{id:idx})
   // console.log(idResult);
   //   }
-let[id,setId]=useState('');
+let[id,setId]=useState('');//id value of the table
+console.log(id);
   async function handleClickId(idx) {
     setId(idx)//using This value for update query to need of id value 
     let idResult = await axios.post("http://localhost:5800/backend/idresult", {
       id: idx,
     });
     console.log(idResult.data.records[0]);
+    alert("Record has been filled")
     const customer_data = idResult.data.records[0];
     setMobile(customer_data.mobile_num); //--->mobile_num is database column name & also we again overwrite The used for incoming use
     setEng_name(customer_data.eng_name);
@@ -119,7 +144,7 @@ let[id,setId]=useState('');
     setVisit_egg_name(customer_data.visit_egg_name);
     setVisit_egg_mobile(customer_data.visit_egg_mobile);
     setMeeting(customer_data.meeting);
-    let dt=customer_data.date_of?customer_data.date_of.split('T')[0]:"";
+    let dt=customer_data.date_of?customer_data.date_of.split('T')[0]:"";//split date from time
     setDate(dt);
     setComment(customer_data.comment)
 
@@ -151,6 +176,7 @@ let[id,setId]=useState('');
     });
     if(resp){
     console.log(resp.data);
+    alert("Record updated successfully");
     }
     await getData()
     setMobile("")

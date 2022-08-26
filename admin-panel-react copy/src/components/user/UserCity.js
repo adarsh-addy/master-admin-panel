@@ -12,6 +12,7 @@ import CloseButton from "react-bootstrap/esm/CloseButton";
 import "../../styles/engineermaster.css";
 
 export default function UserCity() {
+  const [error,setError]=useState(true)
   const [product, setProduct] = useState([]);
   let [city, setCity] = useState("");
   console.log(city);
@@ -24,9 +25,16 @@ export default function UserCity() {
     let result = await axios.post(
       "http://localhost:5800/backend/userCity",
       { city }
-    );
-    console.log(result.data.records);
-    setProduct([...result.data.records]);
+    ).catch((err)=>{
+      console.log(err.response.data.message);
+      alert(err.response.data.message);
+    });
+    if(result){
+      console.log(result.data.records);
+      alert("Record Loaded successfully");
+      // console.log(result.data.records);
+      setProduct([...result.data.records]);
+      };
     setIsLoading(false)
   }
 
@@ -49,7 +57,7 @@ export default function UserCity() {
                         <Form.Label htmlFor="Select">City</Form.Label>
                         <Form.Select
                           id="Select"
-                          onChange={(e) => setCity(e.target.value)}
+                          onChange={(e) => {setCity(e.target.value);e.target.value? setError(false) : setError(true)}}
                         >
                           <option>Something</option>
                           <option>Select1</option>
@@ -61,6 +69,7 @@ export default function UserCity() {
                         variant="primary"
                         type="submit"
                         onClick={handleClick}
+                        disabled={error}
                       >
                         Submit
                       </Button>

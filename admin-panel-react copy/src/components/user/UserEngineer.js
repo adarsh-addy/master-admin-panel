@@ -12,6 +12,7 @@ import CloseButton from "react-bootstrap/esm/CloseButton";
 import "../../styles/engineermaster.css";
 
 export default function UserEngineer() {
+  const [error,setError]=useState(true)
   const [product, setProduct] = useState([]);
   let [eng_name, setEng_name] = useState("");
   console.log(eng_name);
@@ -22,9 +23,16 @@ export default function UserEngineer() {
     let result = await axios.post(
       "http://localhost:5800/backend/userEngineername",
       { eng_name }
-    );
-    console.log(result.data.records);
-    setProduct([...result.data.records]);
+    ).catch((err)=>{
+      console.log(err.response.data.message);
+      alert(err.response.data.message);
+    });
+    if(result){
+      console.log(result.data.records);
+      alert("Record Loaded successfully");
+      // console.log(result.data.records);
+      setProduct([...result.data.records]);
+      }
     setIsLoading(false)
   }
   if(isLoading){
@@ -46,7 +54,7 @@ export default function UserEngineer() {
                         <Form.Label htmlFor="Select">Engineer Name</Form.Label>
                         <Form.Select
                           id="Select"
-                          onChange={(e) => setEng_name(e.target.value)}
+                          onChange={(e) => {setEng_name(e.target.value);e.target.value? setError(false) : setError(true)}}
                         >
                           <option>Something</option>
                           <option>Select1</option>
@@ -58,6 +66,7 @@ export default function UserEngineer() {
                         variant="primary"
                         type="submit"
                         onClick={handleClick}
+                        disabled={error}
                       >
                         Submit
                       </Button>
