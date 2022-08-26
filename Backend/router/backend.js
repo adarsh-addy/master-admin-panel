@@ -223,7 +223,9 @@ BackendRouter.post("/date", (req, res) => {
   });
 });
 
-BackendRouter.post("/place", (req, res) => {
+
+
+BackendRouter.post("/placeSave", (req, res) => {
   const place = req.body.place;
   // let password=req.body.password;
   if(!place){
@@ -233,12 +235,47 @@ BackendRouter.post("/place", (req, res) => {
    }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-    const sqlSearch = `SELECT * FROM customer_details WHERE place='${place}'`;
-    await connection.query(sqlSearch, async (err, result) => {
+
+    const sqlSearch = 'SELECT * FROM place WHERE place=? ';
+    const search_query=mysql.format(sqlSearch,[place]);
+
+    const sqlInsert='INSERT INTO place(place) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[place])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/placeShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM place";
+    await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);
       res.json({
-        message: "Query executed",
+        message: "Query Executed",
         records: result,
       });
       connection.release();
@@ -246,7 +283,10 @@ BackendRouter.post("/place", (req, res) => {
   });
 });
 
-BackendRouter.post("/city", (req, res) => {
+
+
+
+BackendRouter.post("/citySave", (req, res) => {
   const city = req.body.city;
   // let password=req.body.password;
   if(!city){
@@ -256,18 +296,56 @@ BackendRouter.post("/city", (req, res) => {
    }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-    const sqlSearch = `SELECT * FROM customer_details WHERE city='${city}'`;
-    await connection.query(sqlSearch, async (err, result) => {
+
+    const sqlSearch = 'SELECT * FROM city WHERE city=? ';
+    const search_query=mysql.format(sqlSearch,[city]);
+
+    const sqlInsert='INSERT INTO city(city) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[city])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      
+      }
+  });
+})
+});
+
+BackendRouter.get("/cityShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM city";
+    await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);
       res.json({
-        message: "Query executed",
+        message: "Query Executed",
         records: result,
       });
       connection.release();
     });
   });
 });
+
+
 
 
 //user id and password also for admin

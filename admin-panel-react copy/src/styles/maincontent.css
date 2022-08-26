@@ -33,16 +33,14 @@
 
 @media (max-width: 480px) {
   .btn1 {
-    width: 130px;
-    height: 130px;
+    width: 105px;
+    height: 113px;
     background-color: green;
     border-radius: 50%;
     border: none;
-    margin: 20px;
   }
   .parent-btn {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
   }
 }/*# sourceMappingURL=maincontent.css.map */

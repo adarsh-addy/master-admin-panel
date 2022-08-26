@@ -30,17 +30,14 @@ font-size: 15px;
 
 @media(max-width:480px){
     .btn1{
-        width: 130px;
-        height: 130px;
-        background-color: green;
-        border-radius: 50%;
-        border: none;
-        margin: 20px;
-       
+        width: 105px;
+    height: 113px;
+    background-color: green;
+    border-radius: 50%;
+    border: none;
     }
     .parent-btn{
         display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 }

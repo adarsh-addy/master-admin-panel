@@ -22,20 +22,23 @@ export default function Place() {
   async function handleClick(e) {
     setIsLoading(true)
     e.preventDefault();
-    let result = await axios.post(
-      "http://localhost:5800/backend/place",
+    let info = await axios.post(
+      "http://localhost:5800/backend/placeSave",
       { place }
     ).catch((err)=>{
       console.log(err.response);
       alert(err.response.data.message);
     });
-    if(result){
-      console.log(result.data.records);
-      alert("Record Loaded successfully");
+    if(info){
+      console.log(info.data);
+      alert("Record Inserted successfully");
       // console.log(result.data.records);
-      setProduct([...result.data.records]);
+      
       };
-    
+
+      let result = await axios.get("http://localhost:5800/backend/placeShow");
+      console.log(result.data.records);
+    setProduct([...result.data.records]);
     
     setIsLoading(false)
   }
@@ -56,17 +59,13 @@ export default function Place() {
                   <div className="col">
                     <Form>
                       <Form.Group className="mb-3">
-                        <Form.Label htmlFor="Select">Place</Form.Label>
-                        <Form.Select
-                          id="Select"
-                          onChange={(e) => {setPlace(e.target.value);e.target.value? setError(false) : setError(true)}}
-                        >
-                          <option>Something</option>
-                          <option>Select1</option>
-                          <option>Select2</option>
-                        </Form.Select>
-                      </Form.Group>
-
+                      <Form.Label>Place</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Place"
+                        onChange={(e) => {setPlace(e.target.value);e.target.value? setError(false) : setError(true)}}
+                      />
+                    </Form.Group>
                       <Button
                         variant="primary"
                         type="submit"
