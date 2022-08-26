@@ -46,7 +46,8 @@ let isUserNavbar=!(pathName.includes('/login')
 
       <Routes>
       <Route path="/" element={<LandingPage/>} />
-      <Route path="/*" element={<Pagenotfound/>} />
+      <Route path="/*" element={<Pagenotfound/>} /> 
+      {/* this is for error handling for non exist routes */}
 
       {/* admin section */}
         <Route path="/content" element={token && admin==="admin" ? <Content1 />:<Navigate to="/login" replace/>} />
