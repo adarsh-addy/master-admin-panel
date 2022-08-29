@@ -11,7 +11,7 @@ import Loader from "./Loader";
 import CloseButton from "react-bootstrap/esm/CloseButton";
 import "../styles/engineermaster.css";
 
-export default function City() {
+export default function Brand() {
   const [error, setError] = useState(true);
   const [product, setProduct] = useState([]);
   let [brand, setBrand] = useState("");

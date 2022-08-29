@@ -720,28 +720,6 @@ BackendRouter.get("/userShow", async (req, res) => {
   });
 });
 
-BackendRouter.post("/userEngineername", (req, res) => {
-  const eng_name = req.body.eng_name;
-  // let password=req.body.password;
-  if(!eng_name){
-    return res.status(400).send({
-       message:"Invalid Engineer Name"
-     })
-   }
-  db.getConnection(async (err, connection) => {
-    if (err) throw err;
-    const sqlSearch = `SELECT * FROM usercustomerdetails WHERE eng_name='${eng_name}'`;
-    await connection.query(sqlSearch, async (err, result) => {
-      if (err) throw err;
-      console.log("result", result);
-      res.json({
-        message: "Query executed",
-        records: result,
-      });
-      connection.release();
-    });
-  });
-});
 
 BackendRouter.post("/userDate", (req, res) => {
   const fromdate = req.body.fromdate;
@@ -768,22 +746,60 @@ BackendRouter.post("/userDate", (req, res) => {
   });
 });
 
-BackendRouter.post("/userPlace", (req, res) => {
-  const place = req.body.place;
+
+
+BackendRouter.post("/userengineerSave", (req, res) => {
+  const eng_name = req.body.eng_name;
   // let password=req.body.password;
-  if(!place){
+  if(!eng_name){
     return res.status(400).send({
-       message:"Invalid place"
+       message:"Invalid eng_name ",
+       result:eng_name
      })
    }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-    const sqlSearch = `SELECT * FROM usercustomerdetails WHERE place='${place}'`;
-    await connection.query(sqlSearch, async (err, result) => {
+
+    const sqlSearch = 'SELECT * FROM userengineer WHERE eng_name=? ';
+    const search_query=mysql.format(sqlSearch,[eng_name]);
+
+    const sqlInsert='INSERT INTO userengineer(eng_name) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[eng_name])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/userengineerShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM userengineer";
+    await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);
       res.json({
-        message: "Query executed",
+        message: "Query Executed",
         records: result,
       });
       connection.release();
@@ -791,22 +807,182 @@ BackendRouter.post("/userPlace", (req, res) => {
   });
 });
 
-BackendRouter.post("/userCity", (req, res) => {
+
+
+BackendRouter.post("/userCitySave", (req, res) => {
   const city = req.body.city;
   // let password=req.body.password;
   if(!city){
     return res.status(400).send({
-       message:"Invalid city"
+       message:"Invalid city ",
+       result:city
      })
    }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-    const sqlSearch = `SELECT * FROM usercustomerdetails WHERE city='${city}'`;
-    await connection.query(sqlSearch, async (err, result) => {
+
+    const sqlSearch = 'SELECT * FROM usercity WHERE city=? ';
+    const search_query=mysql.format(sqlSearch,[city]);
+
+    const sqlInsert='INSERT INTO usercity(city) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[city])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/usercityShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM usercity";
+    await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);
       res.json({
-        message: "Query executed",
+        message: "Query Executed",
+        records: result,
+      });
+      connection.release();
+    });
+  });
+});
+
+
+
+BackendRouter.post("/userplaceSave", (req, res) => {
+  const place = req.body.place;
+  // let password=req.body.password;
+  if(!place){
+    return res.status(400).send({
+       message:"Invalid place ",
+       result:place
+     })
+   }
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+
+    const sqlSearch = 'SELECT * FROM userplace WHERE place=? ';
+    const search_query=mysql.format(sqlSearch,[place]);
+
+    const sqlInsert='INSERT INTO userplace(place) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[place])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/userplaceShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM userplace";
+    await connection.query(sqlSearch, (err, result) => {
+      if (err) throw err;
+      console.log("result", result);
+      res.json({
+        message: "Query Executed",
+        records: result,
+      });
+      connection.release();
+    });
+  });
+});
+
+
+
+BackendRouter.post("/userbrandSave", (req, res) => {
+  const brand = req.body.brand;
+  // let password=req.body.password;
+  if(!brand){
+    return res.status(400).send({
+       message:"Invalid brand ",
+       result:brand
+     })
+   }
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+
+    const sqlSearch = 'SELECT * FROM userbrand WHERE brand=? ';
+    const search_query=mysql.format(sqlSearch,[brand]);
+
+    const sqlInsert='INSERT INTO userbrand(brand) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[brand])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/userbrandShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM userbrand";
+    await connection.query(sqlSearch, (err, result) => {
+      if (err) throw err;
+      console.log("result", result);
+      res.json({
+        message: "Query Executed",
         records: result,
       });
       connection.release();

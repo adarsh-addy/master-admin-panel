@@ -16,6 +16,10 @@ export default function UserCustomerdetails() {
   
 const[isLoading,setIsLoading]=useState(false);
   const [product, setProduct] = useState([]);
+  const [placeProduct, setPlaceproduct] = useState([]);
+  const [cityProduct, setCityproduct] = useState([]);
+  const [engineerProduct, setEngineerproduct] = useState([]);
+  const [brandProduct, setBrandproduct] = useState([]);
   const [error1,setError1]=useState(true)
   const [error2,setError2]=useState(true)
   const [error3,setError3]=useState(true)
@@ -199,11 +203,39 @@ async function getData(){
     // console.log(result.data.records);
     setProduct([...result.data.records]);
 }
+
+async function handlePlace() {
+  let result = await axios.get("http://localhost:5800/backend/userplaceShow");
+  console.log(result.data.records);
+  setPlaceproduct([...result.data.records]);
+}
+
+async function handleCity() {
+  let result = await axios.get("http://localhost:5800/backend/usercityShow");
+  console.log(result.data.records);
+  setCityproduct([...result.data.records]);
+}
+
+async function handleEngineer() {
+  let result = await axios.get("http://localhost:5800/backend/userengineerShow");
+  console.log(result.data.records);
+  setEngineerproduct([...result.data.records]);
+}
+async function handleBrand() {
+  let result = await axios.get("http://localhost:5800/backend/userbrandShow");
+  console.log(result.data.records);
+  setBrandproduct([...result.data.records]);
+}
+
   useEffect(() => {
     async function res() {
       setIsLoading(true)
       await getData()
     // setTimeout(()=> setIsLoading(false),2000)
+    await handlePlace();
+      await handleCity();
+      await handleEngineer();
+      await handleBrand();
      setIsLoading(false)
     }
     res();
@@ -236,17 +268,24 @@ async function getData(){
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                      <Form.Label htmlFor="Select">Engineer Name</Form.Label>
-                      <Form.Select
-                        id="Select"
-                        onChange={(e) => {setEng_name(e.target.value);e.target.value? setError2(false) : setError2(true)}}
-                        value={eng_name}
-                      >
-                        <option>Something</option>
-                        <option>Select1</option>
-                        <option>Select2</option>
-                      </Form.Select>
-                    </Form.Group>
+                        <Form.Label htmlFor="Select">Engineer Name</Form.Label>
+                        <Form.Select
+                          id="Select"
+                          onChange={(e) => {
+                            setEng_name(e.target.value);
+                            e.target.value ? setError2(false) : setError2(true);
+                          }}
+                          value={eng_name}
+                        >
+                           {engineerProduct.length !== 0 ? (
+                            engineerProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.eng_name}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
+                        </Form.Select>
+                      </Form.Group>
 
                     <Form.Group
                       className="mb-3"
@@ -286,30 +325,46 @@ async function getData(){
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                      <Form.Label htmlFor="Select">Select Place</Form.Label>
-                      <Form.Select
-                        id="Select"
-                        onChange={(e) => {setPlace(e.target.value);e.target.value? setError6(false) : setError6(true)}}
-                        value={place}
-                      >
-                        <option>Select</option>
-                        <option>Select1</option>
-                        <option>Select2</option>
-                      </Form.Select>
-                    </Form.Group>
+                        <Form.Label htmlFor="Select">Select Place</Form.Label>
+                        <Form.Select
+                          id="Select"
+                          onChange={(e) => {
+                            setPlace(e.target.value);
+                            e.target.value ? setError6(false) : setError6(true);
+                          }}
+                          // onClick={handlePlace}
+                          value={place}
+                        >
+                          {placeProduct.length !== 0 ? (
+                            placeProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.place}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
+                        </Form.Select>
+                      </Form.Group>
 
-                    <Form.Group className="mb-3">
-                      <Form.Label htmlFor="Select">Select City</Form.Label>
-                      <Form.Select
-                        id="Select"
-                        onChange={(e) => {setCity(e.target.value);e.target.value? setError7(false) : setError7(true)}}
-                        value={city}
-                      >
-                        <option>Select</option>
-                        <option>Select1</option>
-                        <option>Select2</option>
-                      </Form.Select>
-                    </Form.Group>
+
+                      <Form.Group className="mb-3">
+                        <Form.Label htmlFor="Select">Select City</Form.Label>
+                        <Form.Select
+                          id="Select"
+                          onChange={(e) => {
+                            setCity(e.target.value);
+                            e.target.value ? setError7(false) : setError7(true);
+                          }}
+                          value={city}
+                        >
+                          {cityProduct.length !== 0 ? (
+                            cityProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.city}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
+                        </Form.Select>
+                      </Form.Group>
 
                     <Form.Group
                       className="mb-3"
@@ -338,17 +393,26 @@ async function getData(){
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                      <Form.Label htmlFor="Select">Select Brand</Form.Label>
-                      <Form.Select
-                        id="Select"
-                        onChange={(e) => {setBrand(e.target.value);e.target.value? setError10(false) : setError10(true)}}
-                        value={brand}
-                      >
-                        <option>Select</option>
-                        <option>Select1</option>
-                        <option>Select2</option>
-                      </Form.Select>
-                    </Form.Group>
+                        <Form.Label htmlFor="Select">Select Brand</Form.Label>
+                        <Form.Select
+                          id="Select"
+                          onChange={(e) => {
+                            setBrand(e.target.value);
+                            e.target.value
+                              ? setError10(false)
+                              : setError10(true);
+                          }}
+                          value={brand}
+                        >
+                           {brandProduct.length !== 0 ? (
+                            brandProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.brand}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
+                        </Form.Select>
+                      </Form.Group>
 
                     <Form.Group
                       className="mb-3"

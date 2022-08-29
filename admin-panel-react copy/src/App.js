@@ -22,6 +22,7 @@ import UserPlace from "./components/user/UserPlace";
 import UserCity from "./components/user/UserCity";
 import Pagenotfound from "./components/Pagenotfound";
 import Brand from "./components/Brand"
+import UserBrand from "./components/user/UserBrand";
 // import Loader from "./components/Loader";
 
 function App() {
@@ -67,6 +68,7 @@ let isUserNavbar=!(pathName.includes('/login')
         <Route path="/userleadview" element={token && user==="user" ?<UserLeadview/>:<Navigate to="/login" replace/>} />
         <Route path="/userplace" element={token && user==="user" ?<UserPlace/>:<Navigate to="/login" replace/>} />
         <Route path="/usercity" element={token && user==="user" ?<UserCity/>:<Navigate to="/login" replace/>} />
+        <Route path="/userbrand" element={token && user==="user" ?<UserBrand/>:<Navigate to="/login" replace/>} />
 
         {/* authentication section */}
         <Route path="/login" element={token? <Navigate to="/content" replace/>:<Login />} />

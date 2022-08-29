@@ -11,7 +11,7 @@ import Loader from "../Loader";
 import CloseButton from "react-bootstrap/esm/CloseButton";
 import "../../styles/engineermaster.css";
 
-export default function UserEngineer() {
+export default function Engineermaster() {
   const [error,setError]=useState(true)
   const [product, setProduct] = useState([]);
   let [eng_name, setEng_name] = useState("");
@@ -20,19 +20,23 @@ export default function UserEngineer() {
   async function handleClick(e) {
     setIsLoading(true)
     e.preventDefault();
-    let result = await axios.post(
-      "http://localhost:5800/backend/userEngineername",
-      { eng_name }
-    ).catch((err)=>{
-      console.log(err.response.data.message);
+    let result = await axios
+    .post("http://localhost:5800/backend/userengineerSave", { eng_name })
+    .catch((err) => {
+      console.log(err.response);
       alert(err.response.data.message);
     });
-    if(result){
-      console.log(result.data.records);
-      alert("Record Loaded successfully");
-      // console.log(result.data.records);
-      setProduct([...result.data.records]);
-      }
+  if (result) {
+    console.log(result.data);
+    alert("Record Inserted successfully");
+    // console.log(result.data.records);
+    let info = await axios.get("http://localhost:5800/backend/userengineerShow");
+  console.log(info.data.records);
+  setProduct([...info.data.records]);
+  }
+  
+
+     
     setIsLoading(false)
   }
   if(isLoading){
@@ -46,21 +50,21 @@ export default function UserEngineer() {
           <div className="row">
             <div className="col">
               <Card body className="mt-4">
-              <Link to='/usercontent'><CloseButton style={{float:"right"}}/></Link>
+              <Link to='/content'><CloseButton style={{float:"right"}}/></Link>
                 <div className="row">
                   <div className="col">
                     <Form>
                       <Form.Group className="mb-3">
-                        <Form.Label htmlFor="Select">Engineer Name</Form.Label>
-                        <Form.Select
-                          id="Select"
-                          onChange={(e) => {setEng_name(e.target.value);e.target.value? setError(false) : setError(true)}}
-                        >
-                          <option>Something</option>
-                          <option>Select1</option>
-                          <option>Select2</option>
-                        </Form.Select>
-                      </Form.Group>
+                      
+                      
+
+                      <Form.Label>Engineer Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Engineer Name"
+                            onChange={(e) => {setEng_name(e.target.value);e.target.value? setError(false) : setError(true)}}
+                          />
+                        </Form.Group>
 
                       <Button
                         variant="primary"

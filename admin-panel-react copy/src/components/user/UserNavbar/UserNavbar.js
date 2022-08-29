@@ -70,6 +70,7 @@ export default function UserNavbar() {
                       <Nav.Link href="/userleadview">Leadview/Modify</Nav.Link>
                       <Nav.Link href="/userplace">Place</Nav.Link>
                       <Nav.Link href="/usercity">City</Nav.Link>
+                      <Nav.Link href="/userbrand">Brand</Nav.Link>
                      
                       {/* <Nav.Link href="/login">Admin Dashboard</Nav.Link> */}
                       {/* <Nav.Link href="/login">Login</Nav.Link>
