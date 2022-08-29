@@ -20,20 +20,23 @@ export default function Engineermaster() {
   async function handleClick(e) {
     setIsLoading(true)
     e.preventDefault();
-    let result = await axios.post(
-      "http://localhost:5800/backend/engineername",
-      { eng_name }
-    ).catch((err)=>{
-      console.log(err.response.data.message);
+    let result = await axios
+    .post("http://localhost:5800/backend/engineerSave", { eng_name })
+    .catch((err) => {
+      console.log(err.response);
       alert(err.response.data.message);
     });
-    if(result){
-      console.log(result.data.records);
-      alert("Record Loaded successfully");
-      // console.log(result.data.records);
-      setProduct([...result.data.records]);
-      }
-   
+  if (result) {
+    console.log(result.data);
+    alert("Record Inserted successfully");
+    // console.log(result.data.records);
+    let info = await axios.get("http://localhost:5800/backend/engineerShow");
+  console.log(info.data.records);
+  setProduct([...info.data.records]);
+  }
+  
+
+     
     setIsLoading(false)
   }
   if(isLoading){
@@ -52,16 +55,16 @@ export default function Engineermaster() {
                   <div className="col">
                     <Form>
                       <Form.Group className="mb-3">
-                        <Form.Label htmlFor="Select">Engineer Name</Form.Label>
-                        <Form.Select
-                          id="Select"
-                          onChange={(e) => {setEng_name(e.target.value);e.target.value? setError(false) : setError(true)}}
-                        >
-                          <option>Something</option>
-                          <option>Select1</option>
-                          <option>Select2</option>
-                        </Form.Select>
-                      </Form.Group>
+                      
+                      
+
+                      <Form.Label>Engineer Name</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="Engineer Name"
+                            onChange={(e) => {setEng_name(e.target.value);e.target.value? setError(false) : setError(true)}}
+                          />
+                        </Form.Group>
 
                       <Button
                         variant="primary"
@@ -103,7 +106,7 @@ export default function Engineermaster() {
                           <Tr key={idx}>
                             <Td>{ele.id}</Td>
                             {/* <Td>{ele.mobile_num}</Td> */}
-                            <Td>{ele.eng_name}</Td>
+                            <Td>{ele.engineer_name}</Td>
                             {/* <Td>{ele.cust_name}</Td>
                             <Td>{ele.place}</Td>
                             <Td>{ele.city}</Td>

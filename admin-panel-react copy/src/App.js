@@ -21,6 +21,7 @@ import UserLeadview from "./components/user/UserLeadview";
 import UserPlace from "./components/user/UserPlace";
 import UserCity from "./components/user/UserCity";
 import Pagenotfound from "./components/Pagenotfound";
+import Brand from "./components/Brand"
 // import Loader from "./components/Loader";
 
 function App() {
@@ -56,6 +57,7 @@ let isUserNavbar=!(pathName.includes('/login')
         <Route path="/leadview" element={token && admin==="admin" ?<Leadview />:<Navigate to="/login" replace/>} />
         <Route path="/place" element={token && admin==="admin" ?<Place />:<Navigate to="/login" replace/>} />
         <Route path="/city" element={token && admin==="admin" ?<City />:<Navigate to="/login" replace/>} />
+        <Route path="/brand" element={token && admin==="admin" ?<Brand/>:<Navigate to="/login" replace/>} />
 
         {/* user section */}
         <Route path="/userdashboard/*" element={token && user==="user" ?<UserDashboard/>:<Navigate to="/login" replace/>} />

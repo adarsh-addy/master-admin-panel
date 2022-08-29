@@ -14,8 +14,8 @@ import "../styles/engineermaster.css";
 export default function City() {
   const [error, setError] = useState(true);
   const [product, setProduct] = useState([]);
-  let [city, setCity] = useState("");
-  console.log(city);
+  let [brand, setBrand] = useState("");
+  console.log(brand);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export default function City() {
     setIsLoading(true);
     e.preventDefault();
     let result = await axios
-      .post("http://localhost:5800/backend/citySave", { city })
+      .post("http://localhost:5800/backend/brandSave", { brand })
       .catch((err) => {
         console.log(err.response);
         alert(err.response.data.message);
@@ -32,7 +32,7 @@ export default function City() {
       console.log(result.data);
       alert("Record Inserted successfully");
       // console.log(result.data.records);
-      let info = await axios.get("http://localhost:5800/backend/cityShow");
+      let info = await axios.get("http://localhost:5800/backend/brandShow");
     console.log(info.data.records);
     setProduct([...info.data.records]);
     }
@@ -58,12 +58,12 @@ export default function City() {
                     <div className="col">
                       <Form>
                         <Form.Group className="mb-3">
-                          <Form.Label>City</Form.Label>
+                          <Form.Label>Brand</Form.Label>
                           <Form.Control
                             type="text"
-                            placeholder="City"
+                            placeholder="Brand"
                             onChange={(e) => {
-                              setCity(e.target.value);
+                              setBrand(e.target.value);
                               e.target.value ? setError(false) : setError(true);
                             }}
                           />
@@ -97,9 +97,9 @@ export default function City() {
                           {/* <Th>Engineer</Th> */}
                           {/* <Th>Customer</Th>
                     <Th>Place</Th> */}
-                          <Th>City</Th>
-                          {/* <Th>Meeting</Th>
-                    <Th>Brand</Th> */}
+                          {/* <Th>City</Th> */}
+                          {/* <Th>Meeting</Th> */}
+                    <Th>Cement Brand</Th>
                         </Tr>
                       </Thead>
                       <Tbody>
@@ -112,9 +112,9 @@ export default function City() {
                             <Td>{ele.eng_name}</Td>
                             <Td>{ele.cust_name}</Td>
                             <Td>{ele.place}</Td> */}
-                                <Td>{ele.city}</Td>
-                                {/* <Td>{ele.meeting}</Td>
-                            <Td>{ele.brand}</Td> */}
+                                {/* <Td>{ele.city}</Td> */}
+                                {/* <Td>{ele.meeting}</Td> */}
+                            <Td>{ele.brand}</Td>
                               </Tr>
                             );
                           })

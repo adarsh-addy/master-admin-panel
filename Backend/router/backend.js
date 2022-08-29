@@ -175,28 +175,67 @@ BackendRouter.get("/show", async (req, res) => {
   });
 });
 
-BackendRouter.post("/engineername", (req, res) => {
+
+BackendRouter.post("/engineerSave", (req, res) => {
   const eng_name = req.body.eng_name;
   // let password=req.body.password;
   if(!eng_name){
     return res.status(400).send({
-       message:"Invalid Engineering name "
+       message:"Invalid engineer ",
+       result:eng_name
      })
    }
   db.getConnection(async (err, connection) => {
     if (err) throw err;
-    const sqlSearch = `SELECT * FROM customer_details WHERE eng_name='${eng_name}'`;
-    await connection.query(sqlSearch, async (err, result) => {
+
+    const sqlSearch = 'SELECT * FROM engineer WHERE engineer_name=? ';
+    const search_query=mysql.format(sqlSearch,[eng_name]);
+
+    const sqlInsert='INSERT INTO engineer(engineer_name) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[eng_name])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      }
+    });
+  });
+});
+
+BackendRouter.get("/engineerShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM engineer";
+    await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);
       res.json({
-        message: "Query executed",
+        message: "Query Executed",
         records: result,
       });
       connection.release();
     });
   });
 });
+
+
 
 BackendRouter.post("/date", (req, res) => {
   const fromdate = req.body.fromdate;
@@ -333,6 +372,66 @@ BackendRouter.get("/cityShow", async (req, res) => {
   db.getConnection(async (err, connection) => {
     if (err) throw err;
     const sqlSearch = "SELECT * FROM city";
+    await connection.query(sqlSearch, (err, result) => {
+      if (err) throw err;
+      console.log("result", result);
+      res.json({
+        message: "Query Executed",
+        records: result,
+      });
+      connection.release();
+    });
+  });
+});
+
+
+BackendRouter.post("/brandSave", (req, res) => {
+  const brand = req.body.brand;
+  // let password=req.body.password;
+  if(!brand){
+    return res.status(400).send({
+       message:"Invalid Brand "
+     })
+   }
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+
+    const sqlSearch = 'SELECT * FROM brand WHERE brand=? ';
+    const search_query=mysql.format(sqlSearch,[brand]);
+
+    const sqlInsert='INSERT INTO brand(brand) VALUES(?)';
+    const insert_query=mysql.format(sqlInsert,[brand])
+    await connection.query(search_query, async (err, result) => {
+      if (err) throw err;
+      console.log("---->searching for result");
+      console.log("result", result);
+      console.log(result.length);
+      if(result.length !=0){
+        connection.release();
+        console.log("record already exist");
+        res.json({
+          message:"record already exist"
+        });
+      }else{
+        await connection.query(insert_query,(err,result)=>{
+          if(err) throw err;
+          console.log("record inserted");
+          res.json({
+            message:"record inserted successfully",
+            result:result
+          })
+          connection.release()
+        })
+      
+      }
+  });
+})
+});
+
+BackendRouter.get("/brandShow", async (req, res) => {
+  db.getConnection(async (err, connection) => {
+    if (err) throw err;
+    const sqlSearch = "SELECT * FROM brand";
     await connection.query(sqlSearch, (err, result) => {
       if (err) throw err;
       console.log("result", result);

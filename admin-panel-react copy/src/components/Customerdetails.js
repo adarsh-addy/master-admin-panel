@@ -17,6 +17,8 @@ export default function Customerdetails() {
   const [product, setProduct] = useState([]);
   const [placeProduct, setPlaceproduct] = useState([]);
   const [cityProduct, setCityproduct] = useState([]);
+  const [engineerProduct, setEngineerproduct] = useState([]);
+  const [brandProduct, setBrandproduct] = useState([]);
   const [error1, setError1] = useState(true);
   const [error2, setError2] = useState(true);
   const [error3, setError3] = useState(true);
@@ -219,6 +221,17 @@ export default function Customerdetails() {
     setCityproduct([...result.data.records]);
   }
 
+  async function handleEngineer() {
+    let result = await axios.get("http://localhost:5800/backend/engineerShow");
+    console.log(result.data.records);
+    setEngineerproduct([...result.data.records]);
+  }
+  async function handleBrand() {
+    let result = await axios.get("http://localhost:5800/backend/brandShow");
+    console.log(result.data.records);
+    setBrandproduct([...result.data.records]);
+  }
+
   useEffect(() => {
     async function res() {
       setIsLoading(true);
@@ -226,6 +239,8 @@ export default function Customerdetails() {
       // setTimeout(()=> setIsLoading(false),2000)
       await handlePlace();
       await handleCity();
+      await handleEngineer();
+      await handleBrand();
       setIsLoading(false);
     }
     res();
@@ -270,9 +285,13 @@ export default function Customerdetails() {
                           }}
                           value={eng_name}
                         >
-                          <option>Something</option>
-                          <option>Select1</option>
-                          <option>Select2</option>
+                           {engineerProduct.length !== 0 ? (
+                            engineerProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.engineer_name}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
                         </Form.Select>
                       </Form.Group>
 
@@ -407,9 +426,13 @@ export default function Customerdetails() {
                           }}
                           value={brand}
                         >
-                          <option>Select</option>
-                          <option>Select1</option>
-                          <option>Select2</option>
+                           {brandProduct.length !== 0 ? (
+                            brandProduct.map((ele, idx) => {
+                              return <option key={idx}>{ele.brand}</option>;
+                            })
+                          ) : (
+                            <option>No data</option>
+                          )}
                         </Form.Select>
                       </Form.Group>
 

@@ -33,12 +33,12 @@ export default function Place() {
       console.log(info.data);
       alert("Record Inserted successfully");
       // console.log(result.data.records);
-      
-      };
-
       let result = await axios.get("http://localhost:5800/backend/placeShow");
       console.log(result.data.records);
     setProduct([...result.data.records]);
+      };
+
+    
     
     setIsLoading(false)
   }
