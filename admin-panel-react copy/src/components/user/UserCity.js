@@ -51,7 +51,7 @@ export default function UserCity() {
             <div className="row">
               <div className="col">
                 <Card body className="mt-4">
-                  <Link to="/content">
+                  <Link to="/usercontent">
                     <CloseButton style={{ float: "right" }} />
                   </Link>
                   <div className="row">
